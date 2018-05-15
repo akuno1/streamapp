@@ -8,7 +8,7 @@ function App(){
 return(
 <div>
     <NavBar name="test string"/>
-    
+    <SideBar name="test string"/>
 </div>
 )
 }
