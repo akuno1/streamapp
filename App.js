@@ -2,7 +2,7 @@
 
 // Create a function to wrap up your component
 //<SideBar name="test string"/>
-//<StreamLis t> 
+//<StreamList> 
 //<StreamElement>
 function App(){
 return(
