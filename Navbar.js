@@ -27,9 +27,7 @@ const Card = (props) => {
     );
 }
 
-// Create a ES6 class component    
-class NavBar extends React.Component { 
-    // Use the render function to return JSX component      
+class NavBar extends React.Component {    
     render() { 
         return (
             <div>
