@@ -1,21 +1,20 @@
-
+var res;
 
 function SimpleFetch() {
-    fetch('https://api.steampowered.com/ISteamApps/GetAppList/v2'
-        , {mode: 'no-cors'}
-        )
+    fetch('./steam.json')
         .then(response => response.json())
+        .then(response => res = response)
         //.then(json => console.log(json))
         //.then(response => console.log(response))
 }
 
 
 const StreamList = (props) => {    
-    //SimpleFetch();
+    SimpleFetch();
 
     return (
         <div className=''>
-            STREAMLIST
+            {res}
         </div>
     );
     

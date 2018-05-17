@@ -6,17 +6,34 @@
 //<StreamList> 
 //<StreamElement>
 //<StreamChannel channel="monstercat" id="twitch-embed"/>
-function App(){
+class App extends React.Component {
+    constructor() {
+        super()
+        this.state = {
+            gameList: []
+        }
+    }
     
+
+    componentDidMount( ) {
+        fetch("./steam.json").then(function(response) {
+            return response.json();
+          }).then(function(json) {
+            console.log('fetched data: '+ json.applist.apps[0].name);
+          });
+           
+    }
     
-    return(
-        <div>
-            <NavBar name="test string"/>
-            <SideBar name="test string"/>
-            <StreamList/>
-            
-        </div>
-    );
+    render () {
+        return(
+            <div>
+                <NavBar name="test string"/>
+                <SideBar name="test string"/>
+                <StreamList/>
+                
+            </div>
+        );
+    }
 }
 
 ReactDOM.render(
