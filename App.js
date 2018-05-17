@@ -14,7 +14,7 @@ function App(){
             <NavBar name="test string"/>
             <SideBar name="test string"/>
             <StreamList/>
-            <StreamChannel channel="monstercat" id="twitch-embed"/>
+            
         </div>
     );
 }
