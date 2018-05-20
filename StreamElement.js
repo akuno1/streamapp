@@ -1,12 +1,14 @@
-class StreamElement extends React.Component {    
-    
-    render() { 
-        return (
-            <div className='bg-light-blue dib br3 pa3 ma2 grow bw2 shadow-5'>
-                
-                
-                
+const StreamElement = (props) => {    
+
+    return (
+        <div className="col-1">
+            <div className="card" style={{width: "10em"}}>
+                <img className="card-img-top" src="http://via.placeholder.com/200x200" alt="Card image cap"></img>
+                <div className="card-body">
+                    <p className="card-text">{props.name}</p>
+                </div>
             </div>
-        );
-    } 
+        </div>
+    );
+    
 }

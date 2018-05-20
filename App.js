@@ -16,23 +16,37 @@ class App extends React.Component {
     
 
     componentDidMount( ) {
-        fetch("./steam.json").then(function(response) {
+        fetch("./steamsmall.json").then(function(response) {
             return response.json();
-          }).then(function(json) {
-            console.log('fetched data: '+ json.applist.apps[0].name);
-          });
-           
+        }).then( (json) => {
+            this.setState({gameList: json.applist.apps});
+        });
     }
     
+    
     render () {
-        return(
-            <div>
-                <NavBar name="test string"/>
-                <SideBar name="test string"/>
-                <StreamList/>
-                
-            </div>
-        );
+        var filteredList = []
+        filteredList = this.state.gameList;
+
+
+        console.log("render gamelist: " + filteredList);
+        console.log("render gamelist element: " + filteredList[0]);
+        console.log("stringfy: " + JSON.stringify(filteredList[0]));
+       
+
+        if (filteredList.length === 0) {
+            return <h1> Loading </h1>
+        } else{
+            return (
+                <div>
+                    <NavBar name="test string"/>
+                    <SideBar name="test string"/>
+                    filteredlist[0].name = {filteredList[0].name}
+                    
+                    <StreamList gameList = {filteredList}/>
+                </div>
+            )
+        }
     }
 }
 
