@@ -29,10 +29,10 @@ class App extends React.Component {
         filteredList = this.state.gameList;
 
 
-        console.log("render gamelist: " + filteredList);
+        /*console.log("render gamelist: " + filteredList);
         console.log("render gamelist element: " + filteredList[0]);
         console.log("stringfy: " + JSON.stringify(filteredList[0]));
-       
+        */
 
         if (filteredList.length === 0) {
             return <h1> Loading </h1>
@@ -41,7 +41,7 @@ class App extends React.Component {
                 <div>
                     <NavBar name="test string"/>
                     <SideBar name="test string"/>
-                    filteredlist[0].name = {filteredList[0].name}
+                    
                     
                     <StreamList gameList = {filteredList}/>
                 </div>
