@@ -7,7 +7,7 @@ const StreamList = ( {gameList} ) => {
     }
     
     return (
-        <div className ="row">
+        <div className ="row" style={{width: "100%", margin: 0}}>
             {streamListComponent}
         </div>
     ); 

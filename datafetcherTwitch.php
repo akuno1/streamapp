@@ -1,6 +1,6 @@
 <?php
     DEFINE (TWITCH_API_KEY,'asjvg0jf2nh9bzu7884ue18v4z6xex');
-    $url = 'https://api.twitch.tv/helix/streams/metadata';
+    $url = 'https://api.twitch.tv/helix/games/top?first=100';
     $ch = curl_init();
     $headers=['Client-ID: '.TWITCH_API_KEY, 'Content-type: application/json'];
     curl_setopt($ch, CURLOPT_URL,$url);
@@ -10,4 +10,6 @@
     $result = curl_exec ($ch);
     curl_close ($ch);
     echo $result;
+
+    
 ?>
