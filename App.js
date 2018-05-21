@@ -11,15 +11,23 @@ class App extends React.Component {
         super()
         this.state = {
             gameList: []
+            
         }
     }
     
 
     componentDidMount( ) {
-        fetch("./steamsmall.json").then(function(response) {
+        //fetch("./datafetcherSteam.php").then(function(response) { //fetching data from steam, only works on deployed server
+        fetch("./steamsmall.json").then(function(response) { // fetching data from a mimic local file 
             return response.json();
         }).then( (json) => {
             this.setState({gameList: json.applist.apps});
+        });
+
+        fetch("./datafetcherTwitch.php").then(function(response) {
+            return response.json();
+        }).then( (json) => {
+            console.log(JSON.parse(json));
         });
     }
     
@@ -34,19 +42,22 @@ class App extends React.Component {
         console.log("stringfy: " + JSON.stringify(filteredList[0]));
         */
 
-        if (filteredList.length === 0) {
-            return <h1> Loading </h1>
-        } else{
-            return (
-                <div>
-                    <NavBar name="test string"/>
-                    <SideBar name="test string"/>
-                    
-                    
+        
+        return (
+            <div>
+                <NavBar name="test string"/>
+                <SideBar name="test string"/>
+                
+                {filteredList.length? (
                     <StreamList gameList = {filteredList}/>
-                </div>
-            )
-        }
+                ) : (
+                    <h1> Loading </h1>
+                )}
+                
+                
+            </div>
+        )
+        
     }
 }
 
