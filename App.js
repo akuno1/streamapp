@@ -32,16 +32,18 @@ class App extends React.Component {
     
 
     componentDidMount( ) {
-        fetch("./datafetcherSteam.php").then(function(response) { //fetching data from steam, only works on deployed server
-        //fetch("./steam.json").then(function(response) { // fetching data from a mimic local file 
+        var dataUrl = "";
+        (location.hostname === "") ?  dataUrl = "./steam.json" : dataUrl = "./datafetcherSteam.php"; // fetching data mimic local json :OR: from STEAM with php
+       
+        fetch(dataUrl).then(function(response) { 
             return response.json();
         }).then( (json) => {
             console.log('steam:'+ json);
             this.setState({gameList: json.applist.apps});
         });
-
-        fetch("./datafetcherTwitch.php").then(function(response) {
-        //fetch("./twitch.json").then(function(response) {
+        
+        (location.hostname === "") ?  dataUrl = "./twitch.json" : dataUrl = "./datafetcherTwitch.php"; // fetching data mimic local json :OR: from TWITCH with php
+        fetch(dataUrl).then(function(response) { 
             return response.json();
         }).then( (json) => {
             console.log('twitch:'+json);
@@ -57,6 +59,8 @@ class App extends React.Component {
         filteredList = intersectLists(this.state.gameList, this.state.streamList);
         console.log("filtered list: " + JSON.stringify(filteredList));
         
+        
+
         return (
             <div>
                 <NavBar name="test string"/>
