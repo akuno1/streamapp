@@ -32,17 +32,19 @@ class App extends React.Component {
     
 
     componentDidMount( ) {
-        //fetch("./datafetcherSteam.php").then(function(response) { //fetching data from steam, only works on deployed server
-        fetch("./steamsmall.json").then(function(response) { // fetching data from a mimic local file 
+        fetch("./datafetcherSteam.php").then(function(response) { //fetching data from steam, only works on deployed server
+        //fetch("./steam.json").then(function(response) { // fetching data from a mimic local file 
             return response.json();
         }).then( (json) => {
+            console.log('steam:'+ json);
             this.setState({gameList: json.applist.apps});
         });
 
-        //fetch("./datafetcherTwitch.php").then(function(response) {
-        fetch("./twitch.json").then(function(response) {
+        fetch("./datafetcherTwitch.php").then(function(response) {
+        //fetch("./twitch.json").then(function(response) {
             return response.json();
         }).then( (json) => {
+            console.log('twitch:'+json);
             this.setState({streamList: json.data}); 
         });
     }
@@ -63,7 +65,7 @@ class App extends React.Component {
                 {filteredList.length? (
                     <StreamList gameList = {filteredList}/>
                 ) : (
-                    <h1> Loading </h1>
+                    <Loading/>
                 )}
                 
                 
