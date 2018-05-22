@@ -59,7 +59,7 @@ class App extends React.Component {
         filteredList = intersectLists(this.state.gameList, this.state.streamList);
         console.log("filtered list: " + JSON.stringify(filteredList));
         
-        
+        var streamGame = "";
 
         return (
             <div>
