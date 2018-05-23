@@ -1,20 +1,25 @@
 function TwitchChannel(props) {
-    new Twitch.Embed(props.id, {
+    new Twitch.Embed("root", {
         width: "100%",
-        height: "900em",
-        channel: props.channel,
+        height: screen.height - 76,
+        channel: props.channel//props.channel,
         //layout: "video",
     });
 }
 
-const StreamChannel = (props) => {
+class StreamChannel extends React.Component {
     
-    TwitchChannel(props);
+    componentDidMount(){
+        TwitchChannel(this.props);
+    }
 
-    return (
-        <div className={props.id}>
+    render() {
+        
+        return (
+            <div className="twitchClass">
 
-        </div>
-    );
+            </div>
+        );
+    }
 }
 

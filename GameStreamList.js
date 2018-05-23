@@ -1,4 +1,4 @@
-class StreamList extends React.Component {    
+class GameStreamList extends React.Component {    
   
     render() {
         var streamListComponent = []
