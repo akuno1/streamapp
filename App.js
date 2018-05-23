@@ -56,6 +56,18 @@ class App extends React.Component {
             //console.log('twitch:'+json);
             this.setState({streamList: json.data}); 
         });
+
+        (location.hostname === "") ?  dataUrl = "./twitch.json" : dataUrl = "./datafetcherTwitchGameStreams.php"; // fetching data mimic local json :OR: from TWITCH with php
+        fetch(dataUrl, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                variable: 'yourValue',
+            })
+        });
     }
     
     
@@ -77,8 +89,8 @@ class App extends React.Component {
                 
                 {(filteredList.length )? (
                     (this.state.streamGame == '')? (
-                        //<StreamList gameList = {filteredList} chooseGame = {this.chooseGame}/>
-                        <GameStreamChannel twitchGameId="streamchannel" channel="monstercat"/>
+                        <StreamList gameList = {filteredList} chooseGame = {this.chooseGame}/>
+                        //<GameStreamList />//twitchGameId={filteredList[streamid]} channel="monstercat"/>
                     ):(
                         <StreamChannel channel="monstercat"/>
                     )
