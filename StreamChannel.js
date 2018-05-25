@@ -1,10 +1,13 @@
 function TwitchChannel(props) {
-    new Twitch.Embed("root", {
+    var height = screen.height * 0.85;
+
+    new Twitch.Embed("twitch-embed", {
         width: "100%",
-        height: screen.height - 76,
-        channel: props.channel//props.channel,
-        //layout: "video",
+        height: height, //"800em",
+        channel: props.channel,//props.channel,
+        theem: "dark"
     });
+    //console.log("screen height - x:" + height );
 }
 
 class StreamChannel extends React.Component {
@@ -16,8 +19,7 @@ class StreamChannel extends React.Component {
     render() {
         
         return (
-            <div className="twitchClass">
-
+            <div id="twitch-embed">
             </div>
         );
     }
