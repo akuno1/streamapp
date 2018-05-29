@@ -1,5 +1,5 @@
 function TwitchChannel(props) {
-    var height = screen.height * 0.85;
+    var height = screen.height * 0.80;
 
     new Twitch.Embed("twitch-embed", {
         width: "100%",

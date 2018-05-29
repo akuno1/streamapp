@@ -12,12 +12,6 @@ function intersectLists(listGames, listStreams){//returns the intersection lists
     return resultList;
 }
 
-// Create a function to wrap up your component
-//<NavBar name="test string"/>
-//<SideBar name="test string"/>
-//<StreamList> 
-//<StreamElement>
-//<StreamChannel channel="monstercat" id="twitch-embed"/>
 class App extends React.Component {
     constructor() {
         super()
@@ -25,13 +19,47 @@ class App extends React.Component {
             gameList: [], //list of games on steam
             streamList: [], //list of twitch streams
             streamGame: "", // will search for streams of this game
-            streamChannel: "", //current channel being watched
+            streamChannel: "", //id of current channel being watched
+            channelName: "", //name of the channel to use with twitch player
             gameStreamList: []//{"data":[{"id":"1","id":"2","id":"3","id":"5","id":"5"}]}
             
         }
         this.getGameStreamList = this.getGameStreamList.bind(this);
     }
     
+    getChannelName = (userid) => {// get a list containing streams for the game with gameid
+        if (location.hostname === "") {
+            this.setState({channelName: 'monstercat'});
+            return;
+        }
+        var simpledata;
+
+        var form = new FormData();
+        form.append("userid", userid);
+    
+        var settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "http://aestheticscult.com/react/datafetcherChannelFromId.php",
+        "method": "POST",
+        "headers": {
+            "cache-control": "no-cache",
+            "postman-token": "913ef9da-47cc-c1b9-1702-d79fae72c7ee"
+        },
+        "processData": false,
+        "contentType": false,
+        "mimeType": "multipart/form-data",
+        "data": form
+        }
+    
+        $.ajax(settings).done( (response) => {
+            //console.log('CHANNEL NAME ajax stringfy parse:' + JSON.stringify( JSON.parse(response).data) );
+            simpledata =  JSON.parse(response).data;
+            //console.log('simpledata[0].id: ' + simpledata[0].id);
+            this.setState({channelName: simpledata[0].display_name});
+            return response.data;
+        });
+    }
 
     getGameStreamList = (gameid) => {// get a list containing streams for the game with gameid
         if (location.hostname === "") {
@@ -67,13 +95,14 @@ class App extends React.Component {
     chooseGame = (streamGame) => {
         this.setState({ streamGame: streamGame});
         this.getGameStreamList(streamGame);
-        console.log('choose Game:' + streamGame );
+        //console.log('choose Game:' + streamGame );
         
     }
 
     chooseChannel = (streamChannel) => {
         this.setState({ streamChannel: streamChannel});
-        console.log('choose Channel:' + streamChannel );
+        this.getChannelName(streamChannel);
+        //console.log('choose Channel:' + streamChannel );
     }
 
     
@@ -109,17 +138,13 @@ class App extends React.Component {
         filteredList = intersectLists(this.state.gameList, this.state.streamList);
         //console.log("filtered list: " + JSON.stringify(filteredList));
         
-        //console.log(this.state.streamChannel);
-        var gameStreams = []
         
-        console.log('state - streamgame:' +  
-            this.state.streamGame + // will search for streams of this game
-            'streamchannel:' + this.state.streamChannel //current channel being watched
+        
+        console.log('state - streamgame:' + this.state.streamGame + // will search for streams of this game
+                    'streamchannel:' + this.state.streamChannel +//current channel being watched
+                    'channel Name:' + this.state.channelName  //name of the channel to send to twitch player
         );
         
-        if (this.state.gameStreamList.length > 0) {
-            console.log('listid:' + this.state.gameStreamList[0].id);
-        }
 
         return (
             <div>
@@ -135,7 +160,10 @@ class App extends React.Component {
                         (this.state.streamChannel == '')? (
                             <GameStreamList appid = {this.state.streamGame} gameStreamList ={this.state.gameStreamList} chooseChannel = {this.chooseChannel}/>
                         ):(
-                            <StreamChannel channel = {this.state.streamChannel}/>
+                            (this.state.channelName == '')?
+                                <Loading/>
+                            :
+                                <StreamChannel channel = {this.state.channelName}/>
                         )
                     )
                 
