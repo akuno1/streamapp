@@ -25,7 +25,7 @@ class App extends React.Component {
             gameList: [], //list of games on steam
             streamList: [], //list of twitch streams
             streamGame: "", // will search for streams of this game
-            streamChannel: "CHANNEL100", //current channel being watched
+            streamChannel: "", //current channel being watched
             gameStreamList: []//{"data":[{"id":"1","id":"2","id":"3","id":"5","id":"5"}]}
             
         }
@@ -111,7 +111,12 @@ class App extends React.Component {
         
         //console.log(this.state.streamChannel);
         var gameStreams = []
-        //console.log('gameStreamList stringfy:' + JSON.stringify(this.state.gameStreamList));
+        
+        console.log('state - streamgame:' +  
+            this.state.streamGame + // will search for streams of this game
+            'streamchannel:' + this.state.streamChannel //current channel being watched
+        );
+        
         if (this.state.gameStreamList.length > 0) {
             console.log('listid:' + this.state.gameStreamList[0].id);
         }
@@ -128,9 +133,9 @@ class App extends React.Component {
 
                     ):(
                         (this.state.streamChannel == '')? (
-                            <GameStreamList gameid = {this.state.streamGame} gameStreamList ={this.state.gameStreamList}/>
+                            <GameStreamList appid = {this.state.streamGame} gameStreamList ={this.state.gameStreamList} chooseChannel = {this.chooseChannel}/>
                         ):(
-                            <StreamChannel channel="monstercat"/>
+                            <StreamChannel channel = {this.state.streamChannel}/>
                         )
                     )
                 
