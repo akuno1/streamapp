@@ -112,7 +112,7 @@ class App extends React.Component {
         var dataUrl = "";
         (location.hostname === "") ?  dataUrl = "./steam.json" : dataUrl = "./datafetcherSteam.php"; // fetching data mimic local json :OR: from STEAM with php
        
-        fetch("./steam.json").then(function(response) { 
+        fetch(dataUrl).then(function(response) { 
             return response.json();
         }).then( (json) => {
             //console.log('steam:'+ json);
@@ -120,7 +120,7 @@ class App extends React.Component {
         });
         
         (location.hostname === "") ?  dataUrl = "./twitch.json" : dataUrl = "./datafetcherTwitch.php"; // fetching data mimic local json :OR: from TWITCH with php
-        fetch("./twitch.json").then(function(response) { 
+        fetch(dataUrl).then(function(response) { 
             return response.json();
         }).then( (json) => {
             //console.log('twitch:'+json);
@@ -140,9 +140,9 @@ class App extends React.Component {
         
         
         
-        console.log('state - streamgame:' + this.state.streamGame + // will search for streams of this game
-                    'streamchannel:' + this.state.streamChannel +//current channel being watched
-                    'channel Name:' + this.state.channelName  //name of the channel to send to twitch player
+        console.log('state - streamgame: ' + this.state.streamGame + // will search for streams of this game
+                    '/ streamchannel: ' + this.state.streamChannel +//current channel being watched
+                    '/ channel Name: ' + this.state.channelName  //name of the channel to send to twitch player
         );
         
 
