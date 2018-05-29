@@ -26,7 +26,7 @@ class App extends React.Component {
             streamList: [], //list of twitch streams
             streamGame: "", // will search for streams of this game
             streamChannel: "CHANNEL100", //current channel being watched
-            gameStreamList: {"data":[{"id":"1","id":"2","id":"3","id":"5","id":"5"}]}
+            gameStreamList: []//{"data":[{"id":"1","id":"2","id":"3","id":"5","id":"5"}]}
             
         }
         this.getGameStreamList = this.getGameStreamList.bind(this);
@@ -111,10 +111,10 @@ class App extends React.Component {
         
         //console.log(this.state.streamChannel);
         var gameStreams = []
-        console.log('gameStreamList stringfy:' + JSON.stringify(this.state.gameStreamList));
-        /*if (this.state.getGameStreamList.length > 0) {
-            console.log('creu:' + this.state.getGameStreamList[0].id);
-        }*/
+        //console.log('gameStreamList stringfy:' + JSON.stringify(this.state.gameStreamList));
+        if (this.state.gameStreamList.length > 0) {
+            console.log('listid:' + this.state.gameStreamList[0].id);
+        }
 
         return (
             <div>
