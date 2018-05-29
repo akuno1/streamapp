@@ -8,7 +8,7 @@ class StreamElement extends React.Component {
                     <div className="card" style={{size: "100%"}}>
                         <img className="card-img-top" style={{height: "5em"}} src={"https://steamcdn-a.akamaihd.net/steam/apps/"+ this.props.appid +"/header.jpg"} onError={(e)=>{e.target.src="media/placeholder.jpg"}}></img>
                         <div className="card-body" style={{padding: 5}}>
-                            <p className="card-text" style={{fontSize: "1em", height: "3em"}}>{this.props.name} {this.props.twitchGameId}</p>
+                            <p className="card-text" style={{fontSize: "1em", height: "3em"}}>{this.props.name}</p>
                         </div>
                     </div>
                 </a>

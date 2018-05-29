@@ -8,10 +8,11 @@ class GameStreamElement extends React.Component {
                     <div className="card" style={{size: "100%"}}>
                         <img className="card-img-top" style={{height: "5em"}} src={this.props.thumbnail_url.replace("{height}", "200").replace("{width}", "200")} onError={(e)=>{e.target.src="media/placeholder.jpg"}}></img>
                         <div className="card-body" style={{padding: 5}}>
-                            <p className="card-text text-truncate"  style={{height: "3em" }}>
+                            <p className="card-text text-truncate "  style={{height: "3em" }}>
                                 {this.props.title} 
                                 <br/>
-                                {this.props.viewer_count}
+                                <i className="icon-eye icon text-secondary "> {this.props.viewer_count} </i>
+                                
                             </p>
                         </div>
                     </div>
