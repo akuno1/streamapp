@@ -27,18 +27,22 @@
     echo "/ sortby:" .$sortby;
     echo PHP_EOL;
 */
-    for ($x = 0; $x < $pages; $x++) {
+    for ($x = 1; $x <= $pages; $x++) {
         $html = file_get_html('https://store.steampowered.com/search/?'.$sortby.'&page='. ($x + $start_page). '&tags='. $tag);
              
         foreach($html->find('a.search_result_row') as $article) {
             $item['appid'] = $article->find('img', 0)->src;
             $item['appid'] = substr($item['appid'], 43,-32);
+            
             $item['title'] = $article->find('span.title', 0)->plaintext;
+            $item['title'] = substr($item['title'], 0,-1);
+            
             $item['date'] = $article->find('div.search_released', 0)->plaintext;
+            
             $articles[] = $item;
         }
         //echo $x; //simple debugger
     }
 
-    print_r(json_encode($articles)); 
+    echo (json_encode($articles)); 
 ?>
