@@ -13,6 +13,9 @@ class GameStreamList extends React.Component {
                     viewer_count = {this.props.gameStreamList[i].viewer_count}
                     />) 
             }
+            if (this.props.gameStreamList.length < 1) {
+                streamListComponent.push(<div> There are no active streams for this game :(</div>) 
+            }
 
         
         //console.log("GameStreamList");

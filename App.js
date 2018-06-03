@@ -93,9 +93,11 @@ class App extends React.Component {
     }
 
     getSteamList = (tag, pages, sortby, start_page) => {// get a list of steam games based on tags and sortby(release date(empty) OR relevance(relevance))
+        
         if (location.hostname === "") {
             this.setState({gameList:[{"appid":"6969","title":"PLACEHOLDER GetSteamList","date":"Jul 9, 2013"},{"appid":"570","title":"Dota 2","date":"Jul 9, 2013"},{"appid":"594570","title":"Total War: WARHAMMER II","date":"Sep 28, 2017"},{"appid":"648800","title":"Raft","date":"May 23, 2018"},{"appid":"718670","title":"Cultist Simulator","date":"May 31, 2018"},{"appid":"225540","title":"Just Cause\u2122 3","date":"Nov 30, 2015"},{"appid":"730","title":"Counter-Strike: Global Offensive","date":"Aug 21, 2012"},{"appid":"364360","title":"Total War: WARHAMMER","date":"May 24, 2016"},{"appid":"570940","title":"DARK SOULS\u2122: REMASTERED","date":"May 23, 2018"},{"appid":"230410","title":"Warframe","date":"Mar 25, 2013"},{"appid":"252950","title":"Rocket League\u00ae","date":"Jul 6, 2015"},{"appid":"681660","title":"Bless Online","date":"May 30, 2018"},{"appid":"359550","title":"Tom Clancy's Rainbow Six\u00ae Siege","date":"Dec 1, 2015"},{"appid":"613100","title":"House Flipper","date":"May 17, 2018"},{"appid":"578080","title":"PLAYERUNKNOWN'S BATTLEGROUNDS","date":"Dec 21, 2017"},{"appid":"413150","title":"Stardew Valley","date":"Feb 26, 2016"},{"appid":"440","title":"Team Fortress 2","date":"Oct 10, 2007"},{"appid":"552500","title":"Warhammer: Vermintide 2","date":"Mar 8, 2018"},{"appid":"236390","title":"War Thunder","date":"Aug 15, 2013"},{"appid":"606150","title":"Moonlighter","date":"May 29, 2018"},{"appid":"401850","title":"Just Cause\u2122 3 DLC: Air, Land &amp; Sea Expansion Pass","date":"Nov 30, 2015"},{"appid":"527430","title":"Warhammer 40,000: Inquisitor - Martyr","date":"Aug 31, 2017"},{"appid":"582660","title":"Black Desert Online","date":"May 24, 2017"},{"appid":"620980","title":"Beat Saber","date":"May 1, 2018"},{"appid":"238960","title":"Path of Exile","date":"Oct 23, 2013"},{"appid":"242760","title":"The Forest","date":"Apr 30, 2018"}]});
-            console.log('getSteamList LOCAL:' + this.state.gameList);
+            //console.log('getSteamList LOCAL:' + this.state.gameList);
+            this.getStreamsForGames();
             return;
         }
         
@@ -112,7 +114,7 @@ class App extends React.Component {
              success: (data) => {
               //console.dir(data);
               this.setState({gameList: data});
-              this.getStreamsForGames();
+              this.getStreamsForGames(data);
              }
             });
     }
@@ -121,12 +123,9 @@ class App extends React.Component {
         if (location.hostname === "") {
             this.setState({streamList: [{"id":"33214","name":"Fortnite","box_art_url":"https://static-cdn.jtvnw.net/ttv-boxart/Fortnite-{width}x{height}.jpg"},{"id":"493057","name":"PLAYERUNKNOWN'S BATTLEGROUNDS","box_art_url":"https://static-cdn.jtvnw.net/ttv-boxart/PLAYERUNKNOWN%27S%20BATTLEGROUNDS-{width}x{height}.jpg"}]});
             
-            console.log(' getStreamsForGames LOCAL:' + this.state.streamList);
+            //console.log(' getStreamsForGames LOCAL:' + this.state.streamList);
             return;
         }
-        
-        console.log("inside gamelist");
-        console.dir(this.state.gameList);
 
         $.ajax({
             type:'POST',
@@ -180,7 +179,7 @@ class App extends React.Component {
             this.setState({streamList: json.data}); 
         });*/
         
-        this.getSteamList("", 3, "relevance");
+        this.getSteamList("1662", 10, "");//"relevance");
         
     }
     
@@ -192,11 +191,15 @@ class App extends React.Component {
         filteredList = intersectLists(this.state.gameList, this.state.streamList);
         //console.log("filtered list: " + JSON.stringify(filteredList));
         
-        console.log('gameList RENDER()');
-        console.dir(this.state.gameList);
+        if (this.state.gameList.length > 0 ) {
+            console.log('gameList RENDER()');
+            console.dir(this.state.gameList);
+        }
 
-        console.log('streamList RENDER())');
-        console.dir(this.state.streamList);
+        if (this.state.streamList.length > 0 ) {
+            console.log('streamList RENDER())');
+            console.dir(this.state.streamList);
+        }
 
         console.log('****************************************');
         

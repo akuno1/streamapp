@@ -3,7 +3,7 @@
     
 
     DEFINE (TWITCH_API_KEY,'asjvg0jf2nh9bzu7884ue18v4z6xex');
-    $url = 'https://api.twitch.tv/helix/streams?game_id='.$gameid;
+    $url = 'https://api.twitch.tv/helix/streams?&first=100&game_id='.$gameid;
     $ch = curl_init();
     $headers=['Client-ID: '.TWITCH_API_KEY, 'Content-type: application/json'];
     curl_setopt($ch, CURLOPT_URL,$url);
