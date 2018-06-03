@@ -112,6 +112,33 @@ class App extends React.Component {
              success: (data) => {
               //console.dir(data);
               this.setState({gameList: data});
+              this.getStreamsForGames();
+             }
+            });
+    }
+
+    getStreamsForGames = () => {// get a list of stream ids based on game ids from GameList
+        if (location.hostname === "") {
+            this.setState({streamList: [{"id":"33214","name":"Fortnite","box_art_url":"https://static-cdn.jtvnw.net/ttv-boxart/Fortnite-{width}x{height}.jpg"},{"id":"493057","name":"PLAYERUNKNOWN'S BATTLEGROUNDS","box_art_url":"https://static-cdn.jtvnw.net/ttv-boxart/PLAYERUNKNOWN%27S%20BATTLEGROUNDS-{width}x{height}.jpg"}]});
+            
+            console.log(' getStreamsForGames LOCAL:' + this.state.streamList);
+            return;
+        }
+        
+        console.log("inside gamelist");
+        console.dir(this.state.gameList);
+
+        $.ajax({
+            type:'POST',
+             url:'http://aestheticscult.com/react/datafetcherTwitchGetGames.php',
+             data:{ 
+                 gameList : JSON.stringify(this.state.gameList)
+                },
+             dataType: 'JSON',
+             success: (data) => {
+                //console.log(' getStreamsForGames SERVER:');
+                //console.dir(data);
+                this.setState({streamList: data});
              }
             });
     }
@@ -135,6 +162,15 @@ class App extends React.Component {
     componentDidMount( ) {
         var dataUrl = "";
         
+        /*(location.hostname === "") ?  dataUrl = "./steam.json" : dataUrl = "./datafetcherSteam.php"; // fetching data mimic local json :OR: from STEAM with php
+       
+        fetch(dataUrl).then(function(response) { 
+            return response.json();
+        }).then( (json) => {
+            //console.log('steam:'+ json);
+            this.setState({gameList: json.applist.apps});
+        });
+
         
         (location.hostname === "") ?  dataUrl = "./twitch.json" : dataUrl = "./datafetcherTwitch.php"; // fetching data mimic local json :OR: from TWITCH with php
         fetch(dataUrl).then(function(response) { 
@@ -142,7 +178,7 @@ class App extends React.Component {
         }).then( (json) => {
             //console.log('twitch:'+json);
             this.setState({streamList: json.data}); 
-        });
+        });*/
         
         this.getSteamList("", 3, "relevance");
         
@@ -154,12 +190,12 @@ class App extends React.Component {
         var filteredList = []
         
         filteredList = intersectLists(this.state.gameList, this.state.streamList);
-        console.log("filtered list: " + JSON.stringify(filteredList));
+        //console.log("filtered list: " + JSON.stringify(filteredList));
         
-        console.log('gameList RENDER:');
+        console.log('gameList RENDER()');
         console.dir(this.state.gameList);
 
-        console.log('streamList RENDER:');
+        console.log('streamList RENDER())');
         console.dir(this.state.streamList);
 
         console.log('****************************************');
