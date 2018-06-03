@@ -155,6 +155,11 @@ class App extends React.Component {
         //console.log('choose Channel:' + streamChannel );
     }
 
+    clear = () => {//clear streamGame and streamChannel and channelName
+        this.setState({streamGame :""});
+        this.setState({streamChannel : ""});
+        this.setState({channelName : ""}); 
+    }
     
     
 
@@ -190,7 +195,8 @@ class App extends React.Component {
         
         filteredList = intersectLists(this.state.gameList, this.state.streamList);
         //console.log("filtered list: " + JSON.stringify(filteredList));
-        
+        console.log(this.state.streamGame);
+        /* 
         if (this.state.gameList.length > 0 ) {
             console.log('gameList RENDER()');
             console.dir(this.state.gameList);
@@ -200,7 +206,7 @@ class App extends React.Component {
             console.log('streamList RENDER())');
             console.dir(this.state.streamList);
         }
-
+*/
         console.log('****************************************');
         
         /*console.log(
@@ -212,7 +218,7 @@ class App extends React.Component {
 
         return (
             <div>
-                <NavBar name="test string"/>
+                <NavBar name="test string" clear = {this.clear}/>
                 <SideBar name="test string"/>
                 
                 {(filteredList.length )? (
