@@ -165,32 +165,19 @@ class App extends React.Component {
         this.setState({gameStreamList: []});
         this.setState({loadedGameStreamList: false});
     }
+
+    changeSettings() => {
+
+
+        this.getSteamList("1662", 5, "relevance");
+    }
     
     
 
     componentDidMount( ) {
         var dataUrl = "";
         
-        /*(location.hostname === "") ?  dataUrl = "./steam.json" : dataUrl = "./datafetcherSteam.php"; // fetching data mimic local json :OR: from STEAM with php
-       
-        fetch(dataUrl).then(function(response) { 
-            return response.json();
-        }).then( (json) => {
-            //console.log('steam:'+ json);
-            this.setState({gameList: json.applist.apps});
-        });
-
-        
-        (location.hostname === "") ?  dataUrl = "./twitch.json" : dataUrl = "./datafetcherTwitch.php"; // fetching data mimic local json :OR: from TWITCH with php
-        fetch(dataUrl).then(function(response) { 
-            return response.json();
-        }).then( (json) => {
-            //console.log('twitch:'+json);
-            this.setState({streamList: json.data}); 
-        });*/
-        
         this.getSteamList("1662", 5, "relevance");//"relevance");
-        
     }
     
     
