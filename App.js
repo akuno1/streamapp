@@ -21,7 +21,8 @@ class App extends React.Component {
             streamGame: "", // will search for streams of this game
             streamChannel: "", //id of current channel being watched
             channelName: "", //name of the channel to use with twitch player
-            gameStreamList: []//{"data":[{"id":"1","id":"2","id":"3","id":"5","id":"5"}]}
+            gameStreamList: [],// list of stream channels from a specific game
+            loadedGameStreamList: false // did gameStreamList has finished loading from the ajax request?
             
         }
         this.getGameStreamList = this.getGameStreamList.bind(this);
@@ -64,6 +65,7 @@ class App extends React.Component {
     getGameStreamList = (gameid) => {// get a list containing streams for the game with gameid
         if (location.hostname === "") {
             this.setState({gameStreamList:[{"id":"28879721440","user_id":"30816637","game_id":"29595","community_ids":[],"type":"live","title":"Last stream until 12 june (going to super major) | [A] @AdmiralBulldog","viewer_count":11608,"started_at":"2018-05-29T08:59:33Z","language":"en","thumbnail_url":"https://static-cdn.jtvnw.net/previews-ttv/live_user_admiralbulldog-{width}x{height}.jpg"},{"id":"28879964224","user_id":"46571894","game_id":"29595","community_ids":[],"type":"live","title":"reabilitation by fusion.bet","viewer_count":7398,"started_at":"2018-05-29T09:52:39Z","language":"ru","thumbnail_url":"https://static-cdn.jtvnw.net/previews-ttv/live_user_alohadancetv-{width}x{height}.jpg"},{"id":"28879297296","user_id":"21802540","game_id":"29595","community_ids":[],"type":"live","title":"РОЛЕВЫЕ ИГРЫ МИД/КЕРИ","viewer_count":3324,"started_at":"2018-05-29T07:21:03Z","language":"ru","thumbnail_url":"https://static-cdn.jtvnw.net/previews-ttv/live_user_versuta-{width}x{height}.jpg"},{"id":"28879644976","user_id":"83675234","game_id":"29595","community_ids":["e05ab438-a66f-4970-876d-e604475b20bc"],"type":"live","title":"[EN] Highground vs TNC Tigers. - Bo2 | ProDota Cup SEA | @PTdota2","viewer_count":1428,"started_at":"2018-05-29T08:41:52Z","language":"en","thumbnail_url":"https://static-cdn.jtvnw.net/previews-ttv/live_user_prodotaeu-{width}x{height}.jpg"},{"id":"28880099056","user_id":"87065447","game_id":"29595","community_ids":[],"type":"live","title":"Ruhub | Smile","viewer_count":913,"started_at":"2018-05-29T10:20:01Z","language":"ru","thumbnail_url":"https://static-cdn.jtvnw.net/previews-ttv/live_user_arsartone-{width}x{height}.jpg"},{"id":"28879580448","user_id":"32536070","game_id":"29595","community_ids":[],"type":"live","title":"7.16, nice jokes, volvo","viewer_count":713,"started_at":"2018-05-29T08:26:44Z","language":"ru","thumbnail_url":"https://static-cdn.jtvnw.net/previews-ttv/live_user_y0nd-{width}x{height}.jpg"},{"id":"28879259168","user_id":"113222782","game_id":"29595","community_ids":[],"type":"live","title":"ЛАДДЕР 1Х1 СЕГОДНЯ В 18:00 https://bit.ly/2r15TR3","viewer_count":589,"started_at":"2018-05-29T07:12:36Z","language":"ru","thumbnail_url":"https://static-cdn.jtvnw.net/previews-ttv/live_user_stasikpwnz-{width}x{height}.jpg"},{"id":"28879907376","user_id":"28062280","game_id":"29595","community_ids":["e05ab438-a66f-4970-876d-e604475b20bc"],"type":"live","title":"MPGL Asian Championship - TaskUs Titans vs BOOM ID w/ @MautDota and @braxlikesdota","viewer_count":550,"started_at":"2018-05-29T09:40:27Z","language":"en","thumbnail_url":"https://static-cdn.jtvnw.net/previews-ttv/live_user_met_esports-{width}x{height}.jpg"},{"id":"28879966128","user_id":"83195409","game_id":"29595","community_ids":[],"type":"live","title":"Cuvinte, nu mai am cuvinte.\n","viewer_count":528,"started_at":"2018-05-29T09:53:05Z","language":"en-gb","thumbnail_url":"https://static-cdn.jtvnw.net/previews-ttv/live_user_canceldota-{width}x{height}.jpg"},{"id":"28879751344","user_id":"38461708","game_id":"29595","community_ids":[],"type":"live","title":"~7200mmr.  Розыгрыш 8-ми аркан на выбор!","viewer_count":500,"started_at":"2018-05-29T09:05:41Z","language":"ru","thumbnail_url":"https://static-cdn.jtvnw.net/previews-ttv/live_user_xakoh-{width}x{height}.jpg"},{"id":"28879435760","user_id":"153670212","game_id":"29595","community_ids":[],"type":"live","title":"irrelevant","viewer_count":439,"started_at":"2018-05-29T07:53:19Z","language":"fi","thumbnail_url":"https://static-cdn.jtvnw.net/previews-ttv/live_user_topsonous-{width}x{height}.jpg"},{"id":"28880217904","user_id":"39411368","game_id":"29595","community_ids":["2785a0f0-2a67-4840-a1c3-7ad5e60a7d1f"],"type":"live","title":"Execration vs Entity - So2 - joinDOTA League Season 13 SEA w/ @dragondropdota","viewer_count":432,"started_at":"2018-05-29T10:43:31Z","language":"de","thumbnail_url":"https://static-cdn.jtvnw.net/previews-ttv/live_user_joindotared-{width}x{height}.jpg"},{"id":"28879412320","user_id":"36389882","game_id":"29595","community_ids":[],"type":"live","title":"main(15) / smurf(350) TRYHARD, mostly PANGO","viewer_count":427,"started_at":"2018-05-29T07:47:27Z","language":"ru","thumbnail_url":"https://static-cdn.jtvnw.net/previews-ttv/live_user_funn1k-{width}x{height}.jpg"},{"id":"28880005568","user_id":"22230083","game_id":"29595","community_ids":["009e484a-6f60-425a-9f0d-75b7c2b29fcc","e460229e-2100-4c42-894c-d758651f06c6"],"type":"live","title":"Boom ID vs Task US Titans | Group Stage Best of 2 | MPGL Asian Championship Dota 2 Week 2","viewer_count":363,"started_at":"2018-05-29T10:01:11Z","language":"en","thumbnail_url":"https://static-cdn.jtvnw.net/previews-ttv/live_user_mineskitv-{width}x{height}.jpg"},{"id":"28877332768","user_id":"68465758","game_id":"29595","community_ids":[],"type":"live","title":"Road to 7300 clinkz tiny sky gameplay (заказать бк/буст https://vk.com/snessh)","viewer_count":352,"started_at":"2018-05-29T02:24:50Z","language":"ru","thumbnail_url":"https://static-cdn.jtvnw.net/previews-ttv/live_user_snessh-{width}x{height}.jpg"},{"id":"28879519392","user_id":"29578325","game_id":"29595","community_ids":["e05ab438-a66f-4970-876d-e604475b20bc"],"type":"live","title":"RERUN: Fnatic vs FRIENDS Game 1 - SL i-League S2 LAN - Maut & Fogged","viewer_count":334,"started_at":"2018-05-29T08:12:23Z","language":"en","thumbnail_url":"https://static-cdn.jtvnw.net/previews-ttv/live_user_beyondthesummit-{width}x{height}.jpg"},{"id":"28879749712","user_id":"146813379","game_id":"29595","community_ids":[],"type":"live","title":"🔴 Игра в имитацию - Dota 2 | Игры за Twitch Prime !прайм","viewer_count":299,"started_at":"2018-05-29T09:05:20Z","language":"ru","thumbnail_url":"https://static-cdn.jtvnw.net/previews-ttv/live_user_gamesprouttv-{width}x{height}.jpg"},{"id":"28880465200","user_id":"184273711","game_id":"29595","community_ids":[],"type":"live","title":"Прохождение пещер в турбо моде","viewer_count":265,"started_at":"2018-05-29T11:29:16Z","language":"ru","thumbnail_url":"https://static-cdn.jtvnw.net/previews-ttv/live_user_d2gull-{width}x{height}.jpg"},{"id":"28879288704","user_id":"112236984","game_id":"29595","community_ids":[],"type":"live","title":"level 22 Injoker","viewer_count":185,"started_at":"2018-05-29T07:19:07Z","language":"ru","thumbnail_url":"https://static-cdn.jtvnw.net/previews-ttv/live_user_inv0kergirl-{width}x{height}.jpg"},{"id":"28879650640","user_id":"189571348","game_id":"29595","community_ids":[],"type":"live","title":"1K лвл Компендиума","viewer_count":168,"started_at":"2018-05-29T08:43:03Z","language":"ru","thumbnail_url":"https://static-cdn.jtvnw.net/previews-ttv/live_user_timshob-{width}x{height}.jpg"}]});
+            this.setState({loadedGameStreamList: true});
             return;
         }
             
@@ -88,6 +90,7 @@ class App extends React.Component {
         $.ajax(settings).done( (response) => {
             //console.log('ajax parse:' + JSON.stringify( JSON.parse(response).data) );
             this.setState({gameStreamList: JSON.parse(response).data});
+            this.setState({loadedGameStreamList: true});
             return response.data;
         });
     }
@@ -158,7 +161,9 @@ class App extends React.Component {
     clear = () => {//clear streamGame and streamChannel and channelName
         this.setState({streamGame :""});
         this.setState({streamChannel : ""});
-        this.setState({channelName : ""}); 
+        this.setState({channelName : ""});
+        this.setState({gameStreamList: []});
+        this.setState({loadedGameStreamList: false});
     }
     
     
@@ -184,7 +189,7 @@ class App extends React.Component {
             this.setState({streamList: json.data}); 
         });*/
         
-        this.getSteamList("1662", 10, "");//"relevance");
+        this.getSteamList("1662", 5, "relevance");//"relevance");
         
     }
     
@@ -195,7 +200,7 @@ class App extends React.Component {
         
         filteredList = intersectLists(this.state.gameList, this.state.streamList);
         //console.log("filtered list: " + JSON.stringify(filteredList));
-        console.log(this.state.streamGame);
+       
         /* 
         if (this.state.gameList.length > 0 ) {
             console.log('gameList RENDER()');
@@ -207,13 +212,14 @@ class App extends React.Component {
             console.dir(this.state.streamList);
         }
 */
-        console.log('****************************************');
+        console.log('________________________________');
         
-        /*console.log(
-            'state - streamgame: ' + this.state.streamGame + // will search for streams of this game
+        console.log(
+            'STATE - streamgame: ' + this.state.streamGame + // will search for streams of this game
             '/ streamchannel: ' + this.state.streamChannel +//current channel being watched
-            '/ channel Name: ' + this.state.channelName  //name of the channel to send to twitch player
-        );*/
+            '/ channel Name: ' + this.state.channelName + //name of the channel to send to twitch player
+            '/ loadedGameStreamList: ' + this.state.loadedGameStreamList
+        );
         
 
         return (
@@ -228,7 +234,22 @@ class App extends React.Component {
 
                     ):(
                         (this.state.streamChannel == '')? (
-                            <GameStreamList appid = {this.state.streamGame} gameStreamList ={this.state.gameStreamList} chooseChannel = {this.chooseChannel}/>
+                            /*(this.state.loadedGameStreamList) ? (
+                                <GameStreamList 
+                                    appid = {this.state.streamGame} 
+                                    gameStreamList ={this.state.gameStreamList} 
+                                    chooseChannel = {this.chooseChannel}
+                                    loaded = {this.loadedGameStreamList}
+                                />
+                            ) : (
+                                <Loading/>
+                            )*/
+                            <GameStreamList 
+                                appid = {this.state.streamGame} 
+                                gameStreamList ={this.state.gameStreamList} 
+                                chooseChannel = {this.chooseChannel}
+                                loaded = {this.state.loadedGameStreamList}
+                            />
                         ):(
                             (this.state.channelName == '')?
                                 <Loading/>
