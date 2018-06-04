@@ -14,11 +14,11 @@ class GameStreamList extends React.Component {
             />) 
         }
         if (this.props.gameStreamList.length < 1 ) {
-            console.log("this.props.loaded" + this.props.loaded + "/ ");
+            //console.log("this.props.loaded" + this.props.loaded + "/ ");
             if (this.props.loaded == false) {
                 streamListComponent.push(<Loading/>);
             }else{
-                streamListComponent.push(<div className="col-12"><h2> There are no active streams for this game :(</h2></div>);
+                streamListComponent.push(<span class="justify-content-center col-9 rounded border border-secondary alert alert-secondary text-center m-5" role="alert"><div className='container'><h2> There are no active streams for this game :(</h2></div></span>);
             }
         }
 

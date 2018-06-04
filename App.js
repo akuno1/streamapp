@@ -22,7 +22,15 @@ class App extends React.Component {
             streamChannel: "", //id of current channel being watched
             channelName: "", //name of the channel to use with twitch player
             gameStreamList: [],// list of stream channels from a specific game
-            loadedGameStreamList: false // did gameStreamList has finished loading from the ajax request?
+            loadedGameStreamList: false, // did gameStreamList has finished loading from the ajax request?
+            searchSettings: {
+                tag: '',
+                page: '',
+                sortby: '',
+                start_page: '',
+                active_page: ''
+            },
+            steamTags: []
             
         }
         this.getGameStreamList = this.getGameStreamList.bind(this);
@@ -124,8 +132,7 @@ class App extends React.Component {
 
     getStreamsForGames = () => {// get a list of stream ids based on game ids from GameList
         if (location.hostname === "") {
-            this.setState({streamList: [{"id":"33214","name":"Fortnite","box_art_url":"https://static-cdn.jtvnw.net/ttv-boxart/Fortnite-{width}x{height}.jpg"},{"id":"493057","name":"PLAYERUNKNOWN'S BATTLEGROUNDS","box_art_url":"https://static-cdn.jtvnw.net/ttv-boxart/PLAYERUNKNOWN%27S%20BATTLEGROUNDS-{width}x{height}.jpg"}]});
-            
+            this.setState({streamList: [{"id":"461492","name":"Keep Talking and Nobody Explodes","box_art_url":"https:\/\/static-cdn.jtvnw.net\/ttv-boxart\/Keep%20Talking%20and%20Nobody%20Explodes-{width}x{height}.jpg"},{"id":"498000","name":"House Flipper","box_art_url":"https:\/\/static-cdn.jtvnw.net\/ttv-boxart\/House%20Flipper-{width}x{height}.jpg"},{"id":"494839","name":"Deep Rock Galactic","box_art_url":"https:\/\/static-cdn.jtvnw.net\/ttv-boxart\/Deep%20Rock%20Galactic-{width}x{height}.jpg"},{"id":"15062","name":"Vampire: The Masquerade - Bloodlines","box_art_url":"https:\/\/static-cdn.jtvnw.net\/ttv-boxart\/Vampire:%20The%20Masquerade%20-%20Bloodlines-{width}x{height}.jpg"},{"id":"460630","name":"Tom Clancy's Rainbow Six: Siege","box_art_url":"https:\/\/static-cdn.jtvnw.net\/ttv-boxart\/Tom%20Clancy%27s%20Rainbow%20Six:%20Siege-{width}x{height}.jpg"},{"id":"55","name":"Baldur's Gate","box_art_url":"https:\/\/static-cdn.jtvnw.net\/ttv-boxart\/Baldur%27s%20Gate-{width}x{height}.jpg"},{"id":"263490","name":"Rust","box_art_url":"https:\/\/static-cdn.jtvnw.net\/ttv-boxart\/Rust-{width}x{height}.jpg"},{"id":"29307","name":"Path of Exile","box_art_url":"https:\/\/static-cdn.jtvnw.net\/ttv-boxart\/Path%20of%20Exile-{width}x{height}.jpg"},{"id":"416436","name":"Bless Online","box_art_url":"https:\/\/static-cdn.jtvnw.net\/ttv-boxart\/Bless%20Online-{width}x{height}.jpg"},{"id":"10407","name":"Counter-Strike: Source","box_art_url":"https:\/\/static-cdn.jtvnw.net\/ttv-boxart\/Counter-Strike:%20Source-{width}x{height}.jpg"},{"id":"495323","name":"Pillars of Eternity II: Deadfire","box_art_url":"https:\/\/static-cdn.jtvnw.net\/ttv-boxart\/Pillars%20of%20Eternity%20II:%20Deadfire-{width}x{height}.jpg"},{"id":"493399","name":"Wizard of Legend","box_art_url":"https:\/\/static-cdn.jtvnw.net\/ttv-boxart\/Wizard%20of%20Legend-{width}x{height}.jpg"},{"id":"66366","name":"War Thunder","box_art_url":"https:\/\/static-cdn.jtvnw.net\/ttv-boxart\/War%20Thunder-{width}x{height}.jpg"},{"id":"31376","name":"Terraria","box_art_url":"https:\/\/static-cdn.jtvnw.net\/ttv-boxart\/Terraria-{width}x{height}.jpg"},{"id":"32982","name":"Grand Theft Auto V","box_art_url":"https:\/\/static-cdn.jtvnw.net\/ttv-boxart\/Grand%20Theft%20Auto%20V-{width}x{height}.jpg"},{"id":"488634","name":"Don't Starve Together","box_art_url":"https:\/\/static-cdn.jtvnw.net\/ttv-boxart\/Don%27t%20Starve%20Together-{width}x{height}.jpg"},{"id":"491513","name":"Portal Knights","box_art_url":"https:\/\/static-cdn.jtvnw.net\/ttv-boxart\/Portal%20Knights-{width}x{height}.jpg"},{"id":"493549","name":"Frostpunk","box_art_url":"https:\/\/static-cdn.jtvnw.net\/ttv-boxart\/Frostpunk-{width}x{height}.jpg"},{"id":"490757","name":"BattleTech","box_art_url":"https:\/\/static-cdn.jtvnw.net\/ttv-boxart\/BattleTech-{width}x{height}.jpg"},{"id":"497711","name":"Moonlighter","box_art_url":"https:\/\/static-cdn.jtvnw.net\/ttv-boxart\/Moonlighter-{width}x{height}.jpg"},{"id":"24241","name":"FINAL FANTASY XIV Online","box_art_url":"https:\/\/static-cdn.jtvnw.net\/ttv-boxart\/FINAL%20FANTASY%20XIV%20Online-{width}x{height}.jpg"},{"id":"369075","name":"A Hat in Time","box_art_url":"https:\/\/static-cdn.jtvnw.net\/ttv-boxart\/A%20Hat%20in%20Time-{width}x{height}.jpg"},{"id":"94073","name":"The Binding of Isaac: Rebirth","box_art_url":"https:\/\/static-cdn.jtvnw.net\/ttv-boxart\/The%20Binding%20of%20Isaac:%20Rebirth-{width}x{height}.jpg"},{"id":"490713","name":"Undertale","box_art_url":"https:\/\/static-cdn.jtvnw.net\/ttv-boxart\/Undertale-{width}x{height}.jpg"},{"id":"490384","name":"Planet Coaster","box_art_url":"https:\/\/static-cdn.jtvnw.net\/ttv-boxart\/Planet%20Coaster-{width}x{height}.jpg"},{"id":"30028","name":"The Elder Scrolls V: Skyrim","box_art_url":"https:\/\/static-cdn.jtvnw.net\/ttv-boxart\/The%20Elder%20Scrolls%20V:%20Skyrim-{width}x{height}.jpg"},{"id":"498345","name":"Monster Prom","box_art_url":"https:\/\/static-cdn.jtvnw.net\/ttv-boxart\/Monster%20Prom-{width}x{height}.jpg"},{"id":"460090","name":"Subnautica","box_art_url":"https:\/\/static-cdn.jtvnw.net\/ttv-boxart\/Subnautica-{width}x{height}.jpg"},{"id":"32399","name":"Counter-Strike: Global Offensive","box_art_url":"https:\/\/static-cdn.jtvnw.net\/ttv-boxart\/Counter-Strike:%20Global%20Offensive-{width}x{height}.jpg"},{"id":"459064","name":"Cuphead","box_art_url":"https:\/\/static-cdn.jtvnw.net\/ttv-boxart\/Cuphead-{width}x{height}.jpg"},{"id":"505991","name":"Bloodstained: Curse of the Moon","box_art_url":"https:\/\/static-cdn.jtvnw.net\/ttv-boxart\/Bloodstained:%20Curse%20of%20the%20Moon-{width}x{height}.jpg"},{"id":"489904","name":"Total War: WARHAMMER","box_art_url":"https:\/\/static-cdn.jtvnw.net\/ttv-boxart\/Total%20War:%20WARHAMMER-{width}x{height}.jpg"},{"id":"490292","name":"Dark Souls III","box_art_url":"https:\/\/static-cdn.jtvnw.net\/ttv-boxart\/Dark%20Souls%20III-{width}x{height}.jpg"},{"id":"23453","name":"Fallout: New Vegas","box_art_url":"https:\/\/static-cdn.jtvnw.net\/ttv-boxart\/Fallout:%20New%20Vegas-{width}x{height}.jpg"},{"id":"492763","name":"Rising Storm 2: Vietnam","box_art_url":"https:\/\/static-cdn.jtvnw.net\/ttv-boxart\/Rising%20Storm%202:%20Vietnam-{width}x{height}.jpg"},{"id":"489635","name":"ARK","box_art_url":"https:\/\/static-cdn.jtvnw.net\/ttv-boxart\/ARK-{width}x{height}.jpg"},{"id":"493551","name":"Conan Exiles","box_art_url":"https:\/\/static-cdn.jtvnw.net\/ttv-boxart\/Conan%20Exiles-{width}x{height}.jpg"},{"id":"7022","name":"The Forest","box_art_url":"https:\/\/static-cdn.jtvnw.net\/ttv-boxart\/The%20Forest-{width}x{height}.jpg"},{"id":"499380","name":"Ancestors Legacy","box_art_url":"https:\/\/static-cdn.jtvnw.net\/ttv-boxart\/Ancestors%20Legacy-{width}x{height}.jpg"},{"id":"489776","name":"Fallout 4","box_art_url":"https:\/\/static-cdn.jtvnw.net\/ttv-boxart\/Fallout%204-{width}x{height}.jpg"},{"id":"491757","name":"Overload","box_art_url":"https:\/\/static-cdn.jtvnw.net\/ttv-boxart\/Overload-{width}x{height}.jpg"},{"id":"32345","name":"Borderlands 2","box_art_url":"https:\/\/static-cdn.jtvnw.net\/ttv-boxart\/Borderlands%202-{width}x{height}.jpg"},{"id":"29595","name":"Dota 2","box_art_url":"https:\/\/static-cdn.jtvnw.net\/ttv-boxart\/Dota%202-{width}x{height}.jpg"},{"id":"493815","name":"Oxygen Not Included","box_art_url":"https:\/\/static-cdn.jtvnw.net\/ttv-boxart\/Oxygen%20Not%20Included-{width}x{height}.jpg"},{"id":"66170","name":"Warframe","box_art_url":"https:\/\/static-cdn.jtvnw.net\/ttv-boxart\/Warframe-{width}x{height}.jpg"},{"id":"488492","name":"Icewind Dale: Enhanced Edition","box_art_url":"https:\/\/static-cdn.jtvnw.net\/ttv-boxart\/Icewind%20Dale:%20Enhanced%20Edition-{width}x{height}.jpg"},{"id":"19731","name":"Portal 2","box_art_url":"https:\/\/static-cdn.jtvnw.net\/ttv-boxart\/Portal%202-{width}x{height}.jpg"},{"id":"68063","name":"Armello","box_art_url":"https:\/\/static-cdn.jtvnw.net\/ttv-boxart\/Armello-{width}x{height}.jpg"},{"id":"130942","name":"Factorio","box_art_url":"https:\/\/static-cdn.jtvnw.net\/ttv-boxart\/Factorio-{width}x{height}.jpg"},{"id":"18846","name":"Garry's Mod","box_art_url":"https:\/\/static-cdn.jtvnw.net\/ttv-boxart\/Garry%27s%20Mod-{width}x{height}.jpg"},{"id":"503116","name":"Beat Saber","box_art_url":"https:\/\/static-cdn.jtvnw.net\/ttv-boxart\/Beat%20Saber-{width}x{height}.jpg"},{"id":"271304","name":"7 Days to Die","box_art_url":"https:\/\/static-cdn.jtvnw.net\/ttv-boxart\/7%20Days%20to%20Die-{width}x{height}.jpg"},{"id":"496902","name":"Slay the Spire","box_art_url":"https:\/\/static-cdn.jtvnw.net\/ttv-boxart\/Slay%20the%20Spire-{width}x{height}.jpg"},{"id":"33945","name":"Starbound","box_art_url":"https:\/\/static-cdn.jtvnw.net\/ttv-boxart\/Starbound-{width}x{height}.jpg"},{"id":"417749","name":"Tabletop Simulator","box_art_url":"https:\/\/static-cdn.jtvnw.net\/ttv-boxart\/Tabletop%20Simulator-{width}x{height}.jpg"},{"id":"16676","name":"Team Fortress 2","box_art_url":"https:\/\/static-cdn.jtvnw.net\/ttv-boxart\/Team%20Fortress%202-{width}x{height}.jpg"},{"id":"32742","name":"Kerbal Space Program","box_art_url":"https:\/\/static-cdn.jtvnw.net\/ttv-boxart\/Kerbal%20Space%20Program-{width}x{height}.jpg"},{"id":"386821","name":"Black Desert Online","box_art_url":"https:\/\/static-cdn.jtvnw.net\/ttv-boxart\/Black%20Desert%20Online-{width}x{height}.jpg"},{"id":"461449","name":"Cities: Skylines","box_art_url":"https:\/\/static-cdn.jtvnw.net\/ttv-boxart\/Cities:%20Skylines-{width}x{height}.jpg"},{"id":"394568","name":"RimWorld","box_art_url":"https:\/\/static-cdn.jtvnw.net\/ttv-boxart\/RimWorld-{width}x{height}.jpg"},{"id":"505420","name":"Cultist Simulator","box_art_url":"https:\/\/static-cdn.jtvnw.net\/ttv-boxart\/Cultist%20Simulator-{width}x{height}.jpg"},{"id":"24193","name":"Left 4 Dead 2","box_art_url":"https:\/\/static-cdn.jtvnw.net\/ttv-boxart\/Left%204%20Dead%202-{width}x{height}.jpg"},{"id":"493057","name":"PLAYERUNKNOWN'S BATTLEGROUNDS","box_art_url":"https:\/\/static-cdn.jtvnw.net\/ttv-boxart\/PLAYERUNKNOWN%27S%20BATTLEGROUNDS-{width}x{height}.jpg"},{"id":"498668","name":"Warhammer: Vermintide 2","box_art_url":"https:\/\/static-cdn.jtvnw.net\/ttv-boxart\/Warhammer:%20Vermintide%202-{width}x{height}.jpg"},{"id":"491177","name":"Slime Rancher","box_art_url":"https:\/\/static-cdn.jtvnw.net\/ttv-boxart\/Slime%20Rancher-{width}x{height}.jpg"},{"id":"459327","name":"Hearts of Iron IV","box_art_url":"https:\/\/static-cdn.jtvnw.net\/ttv-boxart\/Hearts%20of%20Iron%20IV-{width}x{height}.jpg"},{"id":"31750","name":"Arma 3","box_art_url":"https:\/\/static-cdn.jtvnw.net\/ttv-boxart\/Arma%203-{width}x{height}.jpg"},{"id":"491878","name":"BeamNG.Drive","box_art_url":"https:\/\/static-cdn.jtvnw.net\/ttv-boxart\/BeamNG.Drive-{width}x{height}.jpg"},{"id":"494925","name":"Raft","box_art_url":"https:\/\/static-cdn.jtvnw.net\/ttv-boxart\/Raft-{width}x{height}.jpg"}] });            
             //console.log(' getStreamsForGames LOCAL:' + this.state.streamList);
             return;
         }
@@ -143,6 +150,23 @@ class App extends React.Component {
                 this.setState({streamList: data});
              }
             });
+    }
+
+    getSteamTags = () => {// get a list of steam games based on tags and sortby(release date(empty) OR relevance(relevance))
+        
+        if (location.hostname === "") {
+            this.setState({steamTags:[{"tag":"492","tagName":"Indie"},{"tag":"19","tagName":"Action"},{"tag":"21","tagName":"Adventure"},{"tag":"597","tagName":"Casual"},{"tag":"9","tagName":"Strategy"},{"tag":"599","tagName":"Simulation"},{"tag":"122","tagName":"RPG"},{"tag":"113","tagName":"Free to Play"},{"tag":"4667","tagName":"Violent"},{"tag":"4182","tagName":"Singleplayer"},{"tag":"128","tagName":"Massively Multiplayer"},{"tag":"701","tagName":"Sports"},{"tag":"4345","tagName":"Gore"},{"tag":"699","tagName":"Racing"},{"tag":"3859","tagName":"Multiplayer"},{"tag":"1756","tagName":"Great Soundtrack"},{"tag":"4166","tagName":"Atmospheric"},{"tag":"1664","tagName":"Puzzle"},{"tag":"6650","tagName":"Nudity"},{"tag":"3871","tagName":"2D"},{"tag":"1667","tagName":"Horror"},{"tag":"21978","tagName":"VR"},{"tag":"4085","tagName":"Anime"},{"tag":"1742","tagName":"Story Rich"},{"tag":"4026","tagName":"Difficult"},{"tag":"12095","tagName":"Sexual Content"},{"tag":"1684","tagName":"Fantasy"},{"tag":"1695","tagName":"Open World"},{"tag":"3942","tagName":"Sci-fi"},{"tag":"1774","tagName":"Shooter"},{"tag":"1685","tagName":"Co-op"}] });
+            return;
+        }
+        
+        $.ajax({
+            type:'GET',
+             url:'http://aestheticscult.com/react/datafetcherSteamTags.php',
+             dataType: 'JSON',
+             success: (data) => {
+              this.setState({steamTags: data});
+             }
+        });
     }
 
     chooseGame = (streamGame) => {
@@ -166,10 +190,15 @@ class App extends React.Component {
         this.setState({loadedGameStreamList: false});
     }
 
-    changeSettings() => {
+    changeSettings = (tag, pages, sortby, start_page) => {
+        //this.setState({ streamChannel: streamChannel});
+        //this.setState({ streamChannel: streamChannel});
+        //this.setState({ streamChannel: streamChannel});
+        
+        
+        
 
-
-        this.getSteamList("1662", 5, "relevance");
+        //this.getSteamList(this.state.searchSettings.tag, this.state.searchSettings.pages, this.state.searchSettings.sortby, this.state.searchSettings.start_page);
     }
     
     
@@ -178,6 +207,7 @@ class App extends React.Component {
         var dataUrl = "";
         
         this.getSteamList("1662", 5, "relevance");//"relevance");
+        this.getSteamTags();
     }
     
     
@@ -198,45 +228,32 @@ class App extends React.Component {
             console.log('streamList RENDER())');
             console.dir(this.state.streamList);
         }
-*/
+*/         
+        console.dir(this.state.steamTags);
         console.log('________________________________');
-        
+        /*
         console.log(
             'STATE - streamgame: ' + this.state.streamGame + // will search for streams of this game
             '/ streamchannel: ' + this.state.streamChannel +//current channel being watched
             '/ channel Name: ' + this.state.channelName + //name of the channel to send to twitch player
             '/ loadedGameStreamList: ' + this.state.loadedGameStreamList
         );
-        
+        */
 
         return (
             <div>
                 <NavBar name="test string" clear = {this.clear}/>
-                <SideBar name="test string"/>
+                
                 
                 {(filteredList.length )? (
                     (this.state.streamGame == '')? (
-                        <StreamList gameList = {filteredList} chooseGame = {this.chooseGame}/>
-                        //<GameStreamList />//twitchGameId={filteredList[streamid]} channel="monstercat"/>
-
+                        <div>
+                            <SearchSettings tags = {this.state.steamTags} getSteamList = {this.getSteamList}/>
+                            <StreamList gameList = {filteredList} chooseGame = {this.chooseGame}/>
+                        </div>
                     ):(
                         (this.state.streamChannel == '')? (
-                            /*(this.state.loadedGameStreamList) ? (
-                                <GameStreamList 
-                                    appid = {this.state.streamGame} 
-                                    gameStreamList ={this.state.gameStreamList} 
-                                    chooseChannel = {this.chooseChannel}
-                                    loaded = {this.loadedGameStreamList}
-                                />
-                            ) : (
-                                <Loading/>
-                            )*/
-                            <GameStreamList 
-                                appid = {this.state.streamGame} 
-                                gameStreamList ={this.state.gameStreamList} 
-                                chooseChannel = {this.chooseChannel}
-                                loaded = {this.state.loadedGameStreamList}
-                            />
+                            <GameStreamList appid = {this.state.streamGame}  gameStreamList ={this.state.gameStreamList} chooseChannel = {this.chooseChannel} loaded = {this.state.loadedGameStreamList} />
                         ):(
                             (this.state.channelName == '')?
                                 <Loading/>
