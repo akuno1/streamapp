@@ -25,7 +25,7 @@ class App extends React.Component {
             loadedGameStreamList: false, // did gameStreamList has finished loading from the ajax request?
             searchSettings: {
                 tag: '',
-                page: '',
+                pages: '',
                 sortby: '',
                 start_page: '',
                 active_page: ''
@@ -104,14 +104,13 @@ class App extends React.Component {
     }
 
     getSteamList = (tag, pages, sortby, start_page) => {// get a list of steam games based on tags and sortby(release date(empty) OR relevance(relevance))
-        
+        this.setState({gameList:[]});
         if (location.hostname === "") {
             this.setState({gameList:[{"appid":"6969","title":"PLACEHOLDER GetSteamList","date":"Jul 9, 2013"},{"appid":"570","title":"Dota 2","date":"Jul 9, 2013"},{"appid":"594570","title":"Total War: WARHAMMER II","date":"Sep 28, 2017"},{"appid":"648800","title":"Raft","date":"May 23, 2018"},{"appid":"718670","title":"Cultist Simulator","date":"May 31, 2018"},{"appid":"225540","title":"Just Cause\u2122 3","date":"Nov 30, 2015"},{"appid":"730","title":"Counter-Strike: Global Offensive","date":"Aug 21, 2012"},{"appid":"364360","title":"Total War: WARHAMMER","date":"May 24, 2016"},{"appid":"570940","title":"DARK SOULS\u2122: REMASTERED","date":"May 23, 2018"},{"appid":"230410","title":"Warframe","date":"Mar 25, 2013"},{"appid":"252950","title":"Rocket League\u00ae","date":"Jul 6, 2015"},{"appid":"681660","title":"Bless Online","date":"May 30, 2018"},{"appid":"359550","title":"Tom Clancy's Rainbow Six\u00ae Siege","date":"Dec 1, 2015"},{"appid":"613100","title":"House Flipper","date":"May 17, 2018"},{"appid":"578080","title":"PLAYERUNKNOWN'S BATTLEGROUNDS","date":"Dec 21, 2017"},{"appid":"413150","title":"Stardew Valley","date":"Feb 26, 2016"},{"appid":"440","title":"Team Fortress 2","date":"Oct 10, 2007"},{"appid":"552500","title":"Warhammer: Vermintide 2","date":"Mar 8, 2018"},{"appid":"236390","title":"War Thunder","date":"Aug 15, 2013"},{"appid":"606150","title":"Moonlighter","date":"May 29, 2018"},{"appid":"401850","title":"Just Cause\u2122 3 DLC: Air, Land &amp; Sea Expansion Pass","date":"Nov 30, 2015"},{"appid":"527430","title":"Warhammer 40,000: Inquisitor - Martyr","date":"Aug 31, 2017"},{"appid":"582660","title":"Black Desert Online","date":"May 24, 2017"},{"appid":"620980","title":"Beat Saber","date":"May 1, 2018"},{"appid":"238960","title":"Path of Exile","date":"Oct 23, 2013"},{"appid":"242760","title":"The Forest","date":"Apr 30, 2018"}]});
             //console.log('getSteamList LOCAL:' + this.state.gameList);
             this.getStreamsForGames();
             return;
         }
-        
         $.ajax({
             type:'POST',
              url:'http://aestheticscult.com/react/datafetcherSteamPage.php',
@@ -155,7 +154,7 @@ class App extends React.Component {
     getSteamTags = () => {// get a list of steam games based on tags and sortby(release date(empty) OR relevance(relevance))
         
         if (location.hostname === "") {
-            this.setState({steamTags:[{"tag":"492","tagName":"Indie"},{"tag":"19","tagName":"Action"},{"tag":"21","tagName":"Adventure"},{"tag":"597","tagName":"Casual"},{"tag":"9","tagName":"Strategy"},{"tag":"599","tagName":"Simulation"},{"tag":"122","tagName":"RPG"},{"tag":"113","tagName":"Free to Play"},{"tag":"4667","tagName":"Violent"},{"tag":"4182","tagName":"Singleplayer"},{"tag":"128","tagName":"Massively Multiplayer"},{"tag":"701","tagName":"Sports"},{"tag":"4345","tagName":"Gore"},{"tag":"699","tagName":"Racing"},{"tag":"3859","tagName":"Multiplayer"},{"tag":"1756","tagName":"Great Soundtrack"},{"tag":"4166","tagName":"Atmospheric"},{"tag":"1664","tagName":"Puzzle"},{"tag":"6650","tagName":"Nudity"},{"tag":"3871","tagName":"2D"},{"tag":"1667","tagName":"Horror"},{"tag":"21978","tagName":"VR"},{"tag":"4085","tagName":"Anime"},{"tag":"1742","tagName":"Story Rich"},{"tag":"4026","tagName":"Difficult"},{"tag":"12095","tagName":"Sexual Content"},{"tag":"1684","tagName":"Fantasy"},{"tag":"1695","tagName":"Open World"},{"tag":"3942","tagName":"Sci-fi"},{"tag":"1774","tagName":"Shooter"},{"tag":"1685","tagName":"Co-op"}] });
+            this.setState({steamTags:[{ "tag": "1662", "tagName": "Survivoaumrls" },{"tag":"492","tagName":"Indie"},{"tag":"19","tagName":"Action"},{"tag":"21","tagName":"Adventure"},{"tag":"597","tagName":"Casual"},{"tag":"9","tagName":"Strategy"},{"tag":"599","tagName":"Simulation"},{"tag":"122","tagName":"RPG"},{"tag":"113","tagName":"Free to Play"},{"tag":"4667","tagName":"Violent"},{"tag":"4182","tagName":"Singleplayer"},{"tag":"128","tagName":"Massively Multiplayer"},{"tag":"701","tagName":"Sports"},{"tag":"4345","tagName":"Gore"},{"tag":"699","tagName":"Racing"},{"tag":"3859","tagName":"Multiplayer"},{"tag":"1756","tagName":"Great Soundtrack"},{"tag":"4166","tagName":"Atmospheric"},{"tag":"1664","tagName":"Puzzle"},{"tag":"6650","tagName":"Nudity"},{"tag":"3871","tagName":"2D"},{"tag":"1667","tagName":"Horror"},{"tag":"21978","tagName":"VR"},{"tag":"4085","tagName":"Anime"},{"tag":"1742","tagName":"Story Rich"},{"tag":"4026","tagName":"Difficult"},{"tag":"12095","tagName":"Sexual Content"},{"tag":"1684","tagName":"Fantasy"},{"tag":"1695","tagName":"Open World"},{"tag":"3942","tagName":"Sci-fi"},{"tag":"1774","tagName":"Shooter"},{"tag":"1685","tagName":"Co-op"}] });
             return;
         }
         
@@ -191,22 +190,34 @@ class App extends React.Component {
     }
 
     changeSettings = (tag, pages, sortby, start_page) => {
-        //this.setState({ streamChannel: streamChannel});
-        //this.setState({ streamChannel: streamChannel});
-        //this.setState({ streamChannel: streamChannel});
+        if (tag == 'n/a') {
+            tag = this.state.searchSettings.tag;
+        }
+        if (pages == 'n/a') {
+            pages = this.state.searchSettings.pages;
+        }
+        if (sortby == 'n/a') {
+            sortby = this.state.searchSettings.sortby;
+        }
+        if (start_page == 'n/a') {
+            start_page = this.state.searchSettings.start_page;
+        }
+        if (start_page < 1) {
+            start_page = 1;
+        }
         
-        
-        
-
-        //this.getSteamList(this.state.searchSettings.tag, this.state.searchSettings.pages, this.state.searchSettings.sortby, this.state.searchSettings.start_page);
+        //start_page = start_page * pages; //multiply pagination by factor
+        console.log ({tag, pages, sortby, start_page});
+        this.setState({ searchSettings : {tag, pages, sortby, start_page}});
+        this.getSteamList( tag, pages, sortby, (start_page - 1 )*pages);
     }
     
     
 
     componentDidMount( ) {
-        var dataUrl = "";
         
-        this.getSteamList("1662", 5, "relevance");//"relevance");
+        this.changeSettings("", 5, "relevance", 1);//"relevance");
+        //this.getSteamList("1662", 5, "newest", 1);//"relevance");
         this.getSteamTags();
     }
     
@@ -229,7 +240,7 @@ class App extends React.Component {
             console.dir(this.state.streamList);
         }
 */         
-        console.dir(this.state.steamTags);
+        console.log (this.state.searchSettings);
         console.log('________________________________');
         /*
         console.log(
@@ -243,12 +254,12 @@ class App extends React.Component {
         return (
             <div>
                 <NavBar name="test string" clear = {this.clear}/>
-                
+                <SearchSettings tags = {this.state.steamTags} changeSettings = {this.changeSettings} searchSettings = {this.state.searchSettings}/>
                 
                 {(filteredList.length )? (
                     (this.state.streamGame == '')? (
                         <div>
-                            <SearchSettings tags = {this.state.steamTags} getSteamList = {this.getSteamList}/>
+                            
                             <StreamList gameList = {filteredList} chooseGame = {this.chooseGame}/>
                         </div>
                     ):(
@@ -261,15 +272,11 @@ class App extends React.Component {
                                 <StreamChannel channel = {this.state.channelName}/>
                         )
                     )
-                
                 ) : (
                     <Loading/>
                 )}
-                
-                
             </div>
         )
-        
     }
 }
 
