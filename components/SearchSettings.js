@@ -93,10 +93,6 @@ class SearchSettings extends React.Component {
 
                     </div>
 
-                   
-                    
-
-                    
                     
                     <div className ="col-xs-12 col-md-3 m-2">
                         <nav aria-label="Page navigation example">
