@@ -19,7 +19,7 @@ class SearchSettings extends React.Component {
         
         var pagination = [];    
         pagination.push(<li class="page-item"><a class="page-link" href="#" onClick={(e) => this.props.changeSettings('n/a', 'n/a', 'n/a', this.props.searchSettings.start_page - 1, e)}>Previous</a></li>);
-        pagination.push(<li class="page-item"><a class="page-link" >{this.props.searchSettings.start_page}</a></li>);
+        pagination.push(<li class="page-item disabled"><a class="page-link bg-success text-white" >{this.props.searchSettings.start_page}</a></li>);
         pagination.push(<li class="page-item"><a class="page-link" href="#" onClick={(e) => this.props.changeSettings('n/a', 'n/a', 'n/a', this.props.searchSettings.start_page + 1, e)}>Next</a></li>);
 
         var searchDepth = [];
@@ -34,9 +34,11 @@ class SearchSettings extends React.Component {
             <div className = "container-fluid">
                 <div className = "row">
                     <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-                        <div class="btn-group mr-2" role="group" aria-label="Tags">
+                        
+                        
+                        <div class="btn-group mr-2" role="group" aria-label="Tags" data-toggle="tooltip" title="The type of games you are looking for." >
                             <div className ="  m-2 p-0">
-                                <div class=" rounded dropdown">
+                                <div class=" rounded dropdown ">
                                     <button class=" btn-primary btn dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Search by Tag
                                     </button>
@@ -47,12 +49,13 @@ class SearchSettings extends React.Component {
                                 </div>
                             </div>
                         </div>
-                        
-                        <div style={{margin: 10}}>
+                        <div style={{margin: 10}} data-toggle="tooltip" title="The type of games you are looking for.">
                             <a class="badge badge-pill badge-success m-2"><span class="text-light">{currentTag }</span></a>
                         </div>
                         
-                        <div class="btn-group mr-2" role="group" aria-label="Sortby">
+
+
+                        <div class="btn-group mr-2" role="group" aria-label="Sortby" data-toggle="tooltip" title="The order that results are presented.">
                             <div className =" m-2 p-0">
                                 <div class="dropdown">
                                     <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -65,27 +68,29 @@ class SearchSettings extends React.Component {
                                 </div>
                             </div>
                         </div>
-
-                        <div style={{margin: 10}}>
+                        <div style={{margin: 10}} data-toggle="tooltip" title="The order that results are presented.">
                             <a class="badge badge-pill badge-success m-2"><span class="text-light">{currentSortby }</span></a>
                         </div>
 
-                        <div class="btn-group mr-2" role="group" aria-label="Search Depth">
+
+
+                        <div class="btn-group mr-2" role="group" aria-label="Search Depth" data-toggle="tooltip" title="The amount of results to load per page.">
                             <div className =" m-2 p-0">
                                 <div class="dropdown">
                                     <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Search Depth
                                     </button>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2" >
                                         {searchDepth}
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-                        <div style={{margin: 10}}>
+                        <div style={{margin: 10}} data-toggle="tooltip" title="The amount of results to load per page.">
                             <a class="badge badge-pill badge-success m-2"><span class="text-light">{this.props.searchSettings.pages}</span></a>
                         </div>
+
+
                     </div>
 
                    
