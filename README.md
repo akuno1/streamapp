@@ -1,4 +1,4 @@
-# streamapp
-Web app that finds twitch streamers playing lesser known games
+# HiddenStreams
+A Web App that finds twitch streamers playing games of certain genres and release date.
 
-The app is built with React and uses API services from Steam and Twitch.tv
+The app is built with React. It uses server side queries to API services from Steam and Twitch.tv
