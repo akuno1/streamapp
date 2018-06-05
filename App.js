@@ -49,7 +49,7 @@ class App extends React.Component {
         var settings = {
         "async": true,
         "crossDomain": true,
-        "url": "http://aestheticscult.com/react/datafetcherChannelFromId.php",
+        "url": "http://aestheticscult.com/react/server/TwitchChannelFromId.php",
         "method": "POST",
         "headers": {
             "cache-control": "no-cache",
@@ -83,7 +83,7 @@ class App extends React.Component {
         var settings = {
         "async": true,
         "crossDomain": true,
-        "url": "http://aestheticscult.com/react/datafetcherTwitchGameStreams.php",
+        "url": "http://aestheticscult.com/react/server/TwitchGameStreams.php",
         "method": "POST",
         "headers": {
             "cache-control": "no-cache",
@@ -113,7 +113,7 @@ class App extends React.Component {
         }
         $.ajax({
             type:'POST',
-             url:'http://aestheticscult.com/react/datafetcherSteamPage.php',
+             url:'http://aestheticscult.com/react/server/SteamPage.php',
              data:{ 
                  "tag": tag,
                  "pages": pages,
@@ -138,7 +138,7 @@ class App extends React.Component {
 
         $.ajax({
             type:'POST',
-             url:'http://aestheticscult.com/react/datafetcherTwitchGetGames.php',
+             url:'http://aestheticscult.com/react/server/TwitchGetGames.php',
              data:{ 
                  gameList : JSON.stringify(this.state.gameList)
                 },
@@ -160,7 +160,7 @@ class App extends React.Component {
         
         $.ajax({
             type:'GET',
-             url:'http://aestheticscult.com/react/datafetcherSteamTags.php',
+             url:'http://aestheticscult.com/react/server/SteamTags.php',
              dataType: 'JSON',
              success: (data) => {
               this.setState({steamTags: data});
@@ -206,56 +206,34 @@ class App extends React.Component {
             start_page = 1;
         }
         
-        //start_page = start_page * pages; //multiply pagination by factor
-        console.log ({tag, pages, sortby, start_page});
+        //console.log ({tag, pages, sortby, start_page});
         this.setState({ searchSettings : {tag, pages, sortby, start_page}});
         this.getSteamList( tag, pages, sortby, (start_page - 1 )*pages);
     }
     
-    
-
     componentDidMount( ) {
-        
-        this.changeSettings("", 5, "relevance", 1);//"relevance");
-        //this.getSteamList("1662", 5, "newest", 1);//"relevance");
+        this.changeSettings("", 5, "relevance", 1);// "newest" or "relevance"
         this.getSteamTags();
     }
-    
-    
     
     render () {
         var filteredList = []
         
         filteredList = intersectLists(this.state.gameList, this.state.streamList);
-        //console.log("filtered list: " + JSON.stringify(filteredList));
-       
-        /* 
-        if (this.state.gameList.length > 0 ) {
-            console.log('gameList RENDER()');
-            console.dir(this.state.gameList);
-        }
-
-        if (this.state.streamList.length > 0 ) {
-            console.log('streamList RENDER())');
-            console.dir(this.state.streamList);
-        }
-*/         
+      
         console.log (this.state.searchSettings);
-        console.log('________________________________');
-        /*
-        console.log(
-            'STATE - streamgame: ' + this.state.streamGame + // will search for streams of this game
-            '/ streamchannel: ' + this.state.streamChannel +//current channel being watched
-            '/ channel Name: ' + this.state.channelName + //name of the channel to send to twitch player
-            '/ loadedGameStreamList: ' + this.state.loadedGameStreamList
-        );
-        */
+        
 
         return (
             <div>
-                <NavBar name="test string" clear = {this.clear}/>
-                <SearchSettings tags = {this.state.steamTags} changeSettings = {this.changeSettings} searchSettings = {this.state.searchSettings}/>
-                
+                <NavBar clear = {this.clear}/>
+
+                {(this.state.streamGame == '') ? (
+                    <SearchSettings tags = {this.state.steamTags} changeSettings = {this.changeSettings} searchSettings = {this.state.searchSettings}/>
+                ) : (
+                    <div/>
+                ) }
+
                 {(filteredList.length )? (
                     (this.state.streamGame == '')? (
                         <div>
