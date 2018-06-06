@@ -221,7 +221,7 @@ class App extends React.Component {
         
         filteredList = intersectLists(this.state.gameList, this.state.streamList);
       
-        console.log (this.state.searchSettings);
+        //console.log (this.state.searchSettings);
         
 
         return (

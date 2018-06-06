@@ -1,31 +1,3 @@
-// Create a ES6 class component    
-class ShoppingList extends React.Component { 
-    // Use the render function to return JSX component      
-    render() { 
-        return (
-        <div className="col">
-        <h1>Shopping List for {this.props.name}</h1>
-        <ul>
-            <li>Instagram</li>
-            <li>WhatsApp</li>
-            <li>Oculus</li>
-        </ul>
-        </div>
-        );
-    } 
-}
-
-const Card = (props) => {
-    return (
-        <div className='bg-light-blue dib br3 pa3 ma2 grow bw2 shadow-5'>
-            <img alt='robots' src={"https://robohash.org/"+ props.id +"?200x200"} />
-            <div>
-                <h2>{props.name}</h2>
-                <p>{props.email}</p>
-            </div>
-        </div>
-    );
-}
 
 class NavBar extends React.Component {    
     render() { 
@@ -42,17 +14,29 @@ class NavBar extends React.Component {
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav mr-auto">
                             <li className="nav-item active">
-                                <a className="nav-link" href="#">Start<span className="sr-only">(current)</span></a>
+                                <a className="nav-link clickable" onClick={(e) => this.props.clear(e)}>Start<span className="sr-only">(current)</span></a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="#">About</a>
+                                <a className="nav-link clickable" data-toggle="collapse" data-target="#about">About</a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="#">Contact</a>
+                                <a className="nav-link clickable " data-toggle="collapse" data-target="#contact">Contact</a>
                             </li>
                         </ul>
                     </div>
                 </nav>
+                    <div class = "">
+                        <div class="collapse m-3" id="about">
+                            <div class="card card-body">
+                                Sometimes, finding streamers playing certain types of games is difficult. This App was built to help people find streams of games according to their preferences.
+                            </div>
+                        </div>
+                        <div class="collapse m-3" id="contact">
+                            <div class="card card-body">
+                                You may send your messages to felipergr@hotmail.com
+                            </div>
+                        </div>
+                    </div>
             </div>
         );
     } 
