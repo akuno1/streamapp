@@ -232,7 +232,7 @@ class App extends React.Component {
                     <SearchSettings tags = {this.state.steamTags} changeSettings = {this.changeSettings} searchSettings = {this.state.searchSettings}/>
                 ) : (
                     (this.state.streamChannel == '')? (
-                        <div className="row"><div className="m-2 col-12"><button type="button" class="btn btn-primary" onClick={(e) => this.clear(e)}><i className="icon-arrow-left icon text-white "> Back</i></button></div></div>
+                        <div className="row"><div className="m-2 col-12"><button type="button" class="btn btn-primary" onClick={(e) => this.clear(e)}><i className="icon-arrow-left icon text-white "></i> Back</button></div></div>
                     ):(
                         <div/>  
                     )

@@ -14,13 +14,13 @@ class NavBar extends React.Component {
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav mr-auto">
                             <li className="nav-item active">
-                                <a className="nav-link clickable" onClick={(e) => this.props.clear(e)}>Start<span className="sr-only">(current)</span></a>
+                                <a className="nav-link clickable mx-2" onClick={(e) => this.props.clear(e)}>Start<span className="sr-only">(current)</span></a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link clickable" data-toggle="collapse" data-target="#about">About</a>
+                                <a className="nav-link clickable mx-2" data-toggle="collapse" data-target="#about">About</a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link clickable " data-toggle="collapse" data-target="#contact">Contact</a>
+                                <a className="nav-link clickable mx-2" data-toggle="collapse" data-target="#contact">Contact</a>
                             </li>
                         </ul>
                     </div>
