@@ -74,7 +74,7 @@ class SearchSettings extends React.Component {
 
 
 
-                        <div class="btn-group mr-2" role="group" aria-label="Search Depth" data-toggle="tooltip" title="The amount of results to load per page.">
+                        <div class="btn-group mr-2" role="group" aria-label="Search Depth" data-toggle="tooltip" title="The quantity of games to search. The bigger the value, the longer it takes to load the full list.">
                             <div className =" m-2 p-0">
                                 <div class="dropdown">
                                     <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
