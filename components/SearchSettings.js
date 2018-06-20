@@ -24,9 +24,15 @@ class SearchSettings extends React.Component {
 
         var searchDepth = [];
         var pageNumbers = [];
+        
+        
+        
+        
         for ( var i = 1; i < 101; i++ ) {
-            pageNumbers[i] = i;
-            searchDepth.push(<button class="dropdown-item"  type="button" onClick={(e) => this.props.changeSettings('n/a',  e.currentTarget.textContent ,'n/a','n/a', e)}>{i}</button>);
+            if ( i == 3 || i == 5 || i == 10 || i == 25 || i == 50 || i == 100 ) {
+                pageNumbers[i] = i;
+                searchDepth.push(<button class="dropdown-item"  type="button" onClick={(e) => this.props.changeSettings('n/a',  e.currentTarget.textContent ,'n/a','n/a', e)}>{i}</button>);
+            }
         }
 
         
@@ -86,7 +92,7 @@ class SearchSettings extends React.Component {
                                 </div>
                             </div>
                         </div>
-                        <div style={{margin: 10}} data-toggle="tooltip" title="The amount of results to load per page.">
+                        <div style={{margin: 10}} data-toggle="tooltip" title="The quantity of games to search. The bigger the value, the longer it takes to load the full list.">
                             <a class="badge badge-pill badge-success m-2"><span class="text-light">{this.props.searchSettings.pages}</span></a>
                         </div>
 
