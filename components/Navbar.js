@@ -29,7 +29,7 @@ class NavBar extends React.Component {
                         <div class="collapse m-3" id="about">
                             <div class="card card-body">
                                 <p>Sometimes, finding streamers playing certain types of games is difficult.</p>
-                                <p>This App was built to help people find streams of games according to their preferences.</p>
+                                <p>This App was built to help people find streams of games according to their preferences. It maches Steam games and Twitch streams to show the game streams you want.</p>
                             </div>
                         </div>
                         <div class="collapse m-3" id="contact">
