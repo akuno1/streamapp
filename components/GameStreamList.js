@@ -18,7 +18,7 @@ class GameStreamList extends React.Component {
             if (this.props.loaded == false) {
                 streamListComponent.push(<Loading/>);
             }else{
-                streamListComponent.push(<span class="justify-content-center col-9 rounded border border-secondary alert alert-secondary text-center m-5" role="alert"><div className='container'><h2> There are no active streams for this game :(</h2></div></span>);
+                streamListComponent.push(<span class="rounded border border-secondary alert m-5" role="alert"><div className='container'><h3> There are no active streams for this game :(</h3></div></span>);
             }
         }
 
