@@ -5,7 +5,7 @@ class NavBar extends React.Component {
             <div>
                 <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
                     <a className="navbar-brand clickable" onClick={(e) => this.props.clear(e)} >
-                        <img height="40px" src="media/hiddenstreamslogo.png"></img>
+                        <img height="40px" src="media/hiddenstreamslogoSMALL.png"></img>
                     </a>
                     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
