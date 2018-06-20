@@ -3,7 +3,7 @@ class SearchSettings extends React.Component {
     render() {
         var tags = []
         this.props.tags.forEach(element => {
-            tags.push(<button class="dropdown-item"  type="button" onClick={(e) => this.props.changeSettings(element.tag, 'n/a','n/a','n/a', e)}>{element.tagName}</button>);
+            tags.push(<li><button class="dropdown-item"  type="button" onClick={(e) => this.props.changeSettings(element.tag, 'n/a','n/a','n/a', e)}>{element.tagName}</button></li>);
         });
 
         
@@ -48,10 +48,10 @@ class SearchSettings extends React.Component {
                                     <button class=" btn-primary btn dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Search by Tag
                                     </button>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                        <button class="dropdown-item" type="button" onClick={(e) => this.props.changeSettings('', 'n/a','n/a','n/a', e)}>No Tag</button>
+                                    <ul class="dropdown-menu columns" aria-labelledby="dropdownMenu2">
+                                        <li><button class="dropdown-item" type="button" onClick={(e) => this.props.changeSettings('', 'n/a','n/a','n/a', e)}>No Tag</button></li>
                                         {tags}
-                                    </div>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
