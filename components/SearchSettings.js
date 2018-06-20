@@ -48,7 +48,7 @@ class SearchSettings extends React.Component {
                                     <button class=" btn-primary btn dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Search by Tag
                                     </button>
-                                    <ul class="dropdown-menu columns" aria-labelledby="dropdownMenu2">
+                                    <ul className="dropdown-menu scrollBar" aria-labelledby="dropdownMenu2">
                                         <li><button class="dropdown-item" type="button" onClick={(e) => this.props.changeSettings('', 'n/a','n/a','n/a', e)}>No Tag</button></li>
                                         {tags}
                                     </ul>

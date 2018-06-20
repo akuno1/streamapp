@@ -27,20 +27,7 @@
     cursor: pointer;
 }
 
-
-@media screen and (max-width: 991px){
-    .columns{
-        
-        overflow-y:scroll;
-    }
-}
-
-@media screen and (min-width: 992px){
-    .columns{
-        -moz-column-count:2; /* Firefox */
-        -webkit-column-count:2; /* Safari and Chrome */
-        column-count:2;
-        width: 500px;
-        
-    }
+.scrollBar {
+    height: 50em;
+    overflow-y: scroll;
 }
