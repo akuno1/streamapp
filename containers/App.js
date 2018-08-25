@@ -49,7 +49,7 @@ class App extends React.Component {
         var settings = {
         "async": true,
         "crossDomain": true,
-        "url": "http://aestheticscult.com/react/server/TwitchChannelFromId.php",
+        "url": "http://aestheticscult.com/hiddenstreams/server/TwitchChannelFromId.php",
         "method": "POST",
         "headers": {
             "cache-control": "no-cache",
@@ -83,7 +83,7 @@ class App extends React.Component {
         var settings = {
         "async": true,
         "crossDomain": true,
-        "url": "http://aestheticscult.com/react/server/TwitchGameStreams.php",
+        "url": "http://aestheticscult.com/hiddenstreams/server/TwitchGameStreams.php",
         "method": "POST",
         "headers": {
             "cache-control": "no-cache",
@@ -113,7 +113,7 @@ class App extends React.Component {
         }
         $.ajax({
             type:'POST',
-             url:'http://aestheticscult.com/react/server/SteamPage.php',
+             url:'http://aestheticscult.com/hiddenstreams/server/SteamPage.php',
              data:{ 
                  "tag": tag,
                  "pages": pages,
@@ -138,7 +138,7 @@ class App extends React.Component {
 
         $.ajax({
             type:'POST',
-             url:'http://aestheticscult.com/react/server/TwitchGetGames.php',
+             url:'http://aestheticscult.com/hiddenstreams/server/TwitchGetGames.php',
              data:{ 
                  steamList : JSON.stringify(this.state.steamList)
                 },
@@ -160,7 +160,7 @@ class App extends React.Component {
         
         $.ajax({
             type:'GET',
-             url:'http://aestheticscult.com/react/server/SteamTags.php',
+             url:'http://aestheticscult.com/hiddenstreams/server/SteamTags.php',
              dataType: 'JSON',
              success: (data) => {
               this.setState({steamTags: data});
@@ -220,7 +220,9 @@ class App extends React.Component {
         var filteredList = []
         
         filteredList = intersectLists(this.state.steamList, this.state.twitchList);
-      
+        
+        console.dir(this.state.steamList);
+        console.dir(this.state.twitchList);
         //console.log (this.state.searchSettings);
         
 
@@ -239,7 +241,7 @@ class App extends React.Component {
                     
                 ) }
 
-                {(filteredList.length )? (
+                {(filteredList.length) ? (
                     (this.state.streamGame == '')? (
                         <div>
                             
