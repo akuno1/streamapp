@@ -136,19 +136,23 @@ class App extends React.Component {
             return;
         }
 
+        
+        
         $.ajax({
             type:'POST',
              url:'http://aestheticscult.com/hiddenstreams/server/TwitchGetGames.php',
              data:{ 
-                 steamList : JSON.stringify(this.state.steamList)
+                 gameList : JSON.stringify(this.state.steamList)
                 },
              dataType: 'JSON',
              success: (data) => {
-                //console.log(' getStreamsForGames SERVER:');
-                //console.dir(data);
+                console.log('steamList SERVER2:');
+                console.dir('[{"appid":"570","title":"Dota 2","date":"Jul 9, 2013"}]');
+                console.log(' getStreamsForGames SERVER:');
+                console.dir(data);
                 this.setState({twitchList: data});
              }
-            });
+        });
     }
 
     getSteamTags = () => {// get a list of steam games based on tags and sortby(release date(empty) OR relevance(relevance))
@@ -220,11 +224,6 @@ class App extends React.Component {
         var filteredList = []
         
         filteredList = intersectLists(this.state.steamList, this.state.twitchList);
-        
-        console.dir(this.state.steamList);
-        console.dir(this.state.twitchList);
-        //console.log (this.state.searchSettings);
-        
 
         return (
             <div>
