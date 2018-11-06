@@ -35,7 +35,7 @@ class NavBar extends React.Component {
                         </div>
                         <div class="collapse m-3" id="contact">
                             <div class="card card-body">
-                                You may send your messages to felipergr@hotmail.com
+                                You may find me on twitter @felipeggrod
                             </div>
                         </div>
                     </div>

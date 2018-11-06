@@ -49,7 +49,7 @@ class App extends React.Component {
         var settings = {
         "async": true,
         "crossDomain": true,
-        "url": "http://aestheticscult.com/hiddenstreams/server/TwitchChannelFromId.php",
+        "url": "http://hiddenstreams.live/server/TwitchChannelFromId.php",
         "method": "POST",
         "headers": {
             "cache-control": "no-cache",
@@ -83,7 +83,7 @@ class App extends React.Component {
         var settings = {
         "async": true,
         "crossDomain": true,
-        "url": "http://aestheticscult.com/hiddenstreams/server/TwitchGameStreams.php",
+        "url": "http://hiddenstreams.live/server/TwitchGameStreams.php",
         "method": "POST",
         "headers": {
             "cache-control": "no-cache",
@@ -113,7 +113,7 @@ class App extends React.Component {
         }
         $.ajax({
             type:'POST',
-             url:'http://aestheticscult.com/hiddenstreams/server/SteamPage.php',
+             url:'http://hiddenstreams.live/server/SteamPage.php',
              data:{ 
                  "tag": tag,
                  "pages": pages,
@@ -140,16 +140,16 @@ class App extends React.Component {
         
         $.ajax({
             type:'POST',
-             url:'http://aestheticscult.com/hiddenstreams/server/TwitchGetGames.php',
+             url:'http://hiddenstreams.live/server/TwitchGetGames.php',
              data:{ 
                  gameList : JSON.stringify(this.state.steamList)
                 },
              dataType: 'JSON',
              success: (data) => {
-                console.log('steamList SERVER2:');
-                console.dir('[{"appid":"570","title":"Dota 2","date":"Jul 9, 2013"}]');
-                console.log(' getStreamsForGames SERVER:');
-                console.dir(data);
+                //console.log('steamList SERVER2:');
+                //console.dir('[{"appid":"570","title":"Dota 2","date":"Jul 9, 2013"}]');
+                //console.log(' getStreamsForGames SERVER:');
+                //console.dir(data);
                 this.setState({twitchList: data});
              }
         });
@@ -164,7 +164,7 @@ class App extends React.Component {
         
         $.ajax({
             type:'GET',
-             url:'http://aestheticscult.com/hiddenstreams/server/SteamTags.php',
+             url:'http://hiddenstreams.live/server/SteamPage.php/server/SteamTags.php',
              dataType: 'JSON',
              success: (data) => {
               this.setState({steamTags: data});
@@ -221,6 +221,7 @@ class App extends React.Component {
     }
     
     render () {
+        console.log("hiddenstreams.LIVE");
         var filteredList = []
         
         filteredList = intersectLists(this.state.steamList, this.state.twitchList);
