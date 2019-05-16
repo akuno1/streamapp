@@ -16,6 +16,7 @@ class App extends React.Component {
     constructor() {
         super()
         this.state = {
+            urlPrefix: 'http://hiddenstreams.live/server/',
             steamList: [], //list of games on steam
             twitchList: [], //list of twitch streams
             streamGame: "", // will search for streams of this game
@@ -49,7 +50,7 @@ class App extends React.Component {
         var settings = {
         "async": true,
         "crossDomain": true,
-        "url": "http://hiddenstreams.live/server/TwitchChannelFromId.php",
+        "url": this.state.urlPrefix + "TwitchChannelFromId.php",
         "method": "POST",
         "headers": {
             "cache-control": "no-cache",
@@ -83,7 +84,7 @@ class App extends React.Component {
         var settings = {
         "async": true,
         "crossDomain": true,
-        "url": "http://hiddenstreams.live/server/TwitchGameStreams.php",
+        "url": this.state.urlPrefix + "TwitchGameStreams.php",
         "method": "POST",
         "headers": {
             "cache-control": "no-cache",
@@ -113,7 +114,7 @@ class App extends React.Component {
         }
         $.ajax({
             type:'POST',
-             url:'http://hiddenstreams.live/server/SteamPage.php',
+             url: this.state.urlPrefix + 'SteamPage.php',
              data:{ 
                  "tag": tag,
                  "pages": pages,
@@ -140,7 +141,7 @@ class App extends React.Component {
         
         $.ajax({
             type:'POST',
-             url:'http://hiddenstreams.live/server/TwitchGetGames.php',
+             url: this.state.urlPrefix + 'TwitchGetGames.php',
              data:{ 
                  gameList : JSON.stringify(this.state.steamList)
                 },
@@ -164,7 +165,7 @@ class App extends React.Component {
         
         $.ajax({
             type:'GET',
-             url:'http://hiddenstreams.live/server/SteamPage.php/server/SteamTags.php',
+             url: this.state.urlPrefix + 'SteamTags.php',
              dataType: 'JSON',
              success: (data) => {
               this.setState({steamTags: data});
