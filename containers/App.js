@@ -16,7 +16,7 @@ class App extends React.Component {
     constructor() {
         super()
         this.state = {
-            urlPrefix: 'http://hiddenstreams.live/server/',
+            urlPrefix: window.location.href + 'server/',
             steamList: [], //list of games on steam
             twitchList: [], //list of twitch streams
             streamGame: "", // will search for streams of this game
@@ -222,7 +222,6 @@ class App extends React.Component {
     }
     
     render () {
-        console.log("hiddenstreams.LIVE");
         var filteredList = []
         
         filteredList = intersectLists(this.state.steamList, this.state.twitchList);
